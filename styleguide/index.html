@@ -1,0 +1,1226 @@
+<title>Avocadots Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&family=Poppins:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* ==========================================================================
+   The system's own tokens. This page is built with them — a style guide that
+   doesn't use its own system is a contradiction.
+   ========================================================================== */
+:root {
+  --green-50:#f2f8ea; --green-100:#e2efd0; --green-200:#c7e0a6; --green-300:#a8ce76;
+  --green-400:#86bd42; --green-500:#6ea233; --green-600:#57822a; --green-700:#436421;
+  --green-800:#334c1a; --green-850:#24443a; --green-900:#1c3830; --green-950:#0f1f1a;
+  --gold-100:#fdf3d4; --gold-300:#f4dc7e; --gold-500:#eac435; --gold-700:#8d710b; --gold-900:#6b5507;
+  --neutral-0:#ffffff; --neutral-50:#f8faf8; --neutral-100:#f0f3f0; --neutral-200:#e2e7e3;
+  --neutral-300:#c9d1cb; --neutral-400:#a3aea6; --neutral-500:#7d8a80; --neutral-600:#5e6b62;
+  --neutral-700:#46514a; --neutral-800:#303833; --neutral-900:#1a1f1c;
+
+  --font-display:'Manrope',ui-sans-serif,system-ui,sans-serif;
+  --font-body:'Poppins',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+
+  --text-display:clamp(2.75rem,1.60rem + 5.00vw,5.00rem);
+  --text-h1:clamp(2.25rem,1.55rem + 3.00vw,3.75rem);
+  --text-h2:clamp(1.85rem,1.40rem + 2.00vw,2.85rem);
+  --text-h3:clamp(1.50rem,1.25rem + 1.10vw,2.10rem);
+  --text-h4:clamp(1.25rem,1.12rem + 0.60vw,1.60rem);
+  --text-h5:clamp(1.10rem,1.03rem + 0.30vw,1.30rem);
+  --text-lg:1.125rem; --text-base:1rem; --text-sm:0.875rem; --text-xs:0.75rem;
+
+  --leading-display:1.02; --leading-tight:1.12; --leading-snug:1.25;
+  --leading-normal:1.5; --leading-relaxed:1.65;
+  --tracking-display:-0.035em; --tracking-tight:-0.02em; --tracking-snug:-0.01em;
+  --tracking-wide:0.04em; --tracking-label:0.08em;
+  --weight-regular:400; --weight-medium:500; --weight-semibold:600;
+  --measure:68ch; --measure-narrow:52ch;
+
+  --space-1:0.25rem; --space-2:0.5rem; --space-3:0.75rem; --space-4:1rem;
+  --space-5:1.5rem; --space-6:2rem; --space-7:2.5rem; --space-8:3rem;
+  --space-9:4rem; --space-10:5rem; --space-11:6rem; --space-12:8rem;
+
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-pill:999px;
+
+  --elevation-1:0 1px 2px rgba(28,56,48,.06), 0 1px 3px rgba(28,56,48,.04);
+  --elevation-2:0 2px 4px rgba(28,56,48,.06), 0 4px 12px rgba(28,56,48,.07);
+  --elevation-3:0 4px 8px rgba(28,56,48,.07), 0 12px 28px rgba(28,56,48,.10);
+  --elevation-4:0 8px 16px rgba(28,56,48,.08), 0 24px 56px rgba(28,56,48,.14);
+
+  --duration-fast:140ms; --duration-base:220ms; --duration-slow:360ms;
+  --ease-standard:cubic-bezier(.2,0,0,1); --ease-out:cubic-bezier(.16,1,.3,1);
+
+  /* Page chrome — the only tokens that follow the viewer's theme. */
+  --page-bg:var(--neutral-0);
+  --page-surface:var(--neutral-50);
+  --page-raised:var(--neutral-0);
+  --page-ink:var(--green-900);
+  --page-ink-muted:var(--neutral-600);
+  --page-ink-subtle:var(--neutral-500);
+  --page-border:var(--neutral-200);
+  --page-border-strong:var(--neutral-300);
+  --page-link:var(--green-700);
+  --page-rail:var(--neutral-50);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-bg:var(--green-900);
+    --page-surface:var(--green-850);
+    --page-raised:var(--green-850);
+    --page-ink:var(--neutral-0);
+    --page-ink-muted:var(--neutral-400);
+    --page-ink-subtle:var(--neutral-500);
+    --page-border:rgba(255,255,255,.14);
+    --page-border-strong:rgba(255,255,255,.26);
+    --page-link:var(--green-300);
+    --page-rail:var(--green-950);
+  }
+}
+:root[data-theme="dark"] {
+  --page-bg:var(--green-900);
+  --page-surface:var(--green-850);
+  --page-raised:var(--green-850);
+  --page-ink:var(--neutral-0);
+  --page-ink-muted:var(--neutral-400);
+  --page-ink-subtle:var(--neutral-500);
+  --page-border:rgba(255,255,255,.14);
+  --page-border-strong:rgba(255,255,255,.26);
+  --page-link:var(--green-300);
+  --page-rail:var(--green-950);
+}
+
+/* --------------------------------------------------------------------------
+   Specimen canvases. These pin the semantic tokens explicitly, so a light
+   specimen stays light and a dark specimen stays dark whatever theme the
+   reader is in. This is exactly how .on-dark works in the real system.
+   -------------------------------------------------------------------------- */
+.canvas {
+  --bg:var(--neutral-0); --surface:var(--neutral-0); --surface-sunken:var(--neutral-50);
+  --surface-raised:var(--neutral-0); --surface-accent:var(--green-50);
+  --ink:var(--green-900); --ink-muted:var(--neutral-600); --ink-subtle:var(--neutral-500);
+  --border:var(--neutral-200); --border-strong:var(--neutral-300);
+  --brand:var(--green-400); --brand-hover:var(--green-300); --brand-active:var(--green-200);
+  --on-brand:var(--green-900); --brand-text:var(--green-700); --brand-text-hover:var(--green-800);
+  --accent:var(--gold-500); --on-accent:var(--green-900); --focus:var(--green-600);
+  --success:#0e7a4a; --warning:#8d710b; --danger:#b3242f;
+  --elev-card:var(--elevation-2);
+  background:var(--bg); color:var(--ink);
+}
+.canvas--dark {
+  --bg:var(--green-900); --surface:var(--green-900); --surface-sunken:var(--green-950);
+  --surface-raised:var(--green-850); --surface-accent:var(--green-850);
+  --ink:var(--neutral-0); --ink-muted:var(--neutral-400); --ink-subtle:var(--neutral-500);
+  --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.26);
+  --brand:var(--green-400); --brand-hover:var(--green-300); --brand-active:var(--green-200);
+  --on-brand:var(--green-900); --brand-text:var(--green-300); --brand-text-hover:var(--green-200);
+  --accent:var(--gold-500); --on-accent:var(--green-900); --focus:var(--green-300);
+  --success:#6fd39b; --warning:#f4dc7e; --danger:#ffb3b3;
+  --elev-card:none;
+}
+
+/* ==========================================================================
+   Page chrome
+   ========================================================================== */
+*,*::before,*::after { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--page-bg);
+  color:var(--page-ink);
+  font-family:var(--font-body);
+  font-size:var(--text-base);
+  line-height:var(--leading-normal);
+  -webkit-font-smoothing:antialiased;
+}
+
+:where(a):focus-visible,:where(button):focus-visible {
+  outline:3px solid var(--page-link); outline-offset:2px; border-radius:4px;
+}
+
+.layout { display:grid; grid-template-columns:236px minmax(0,1fr); gap:0; }
+@media (max-width:900px){ .layout { grid-template-columns:1fr; } }
+
+/* -- Rail ---------------------------------------------------------------- */
+.rail {
+  position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+  padding:var(--space-6) var(--space-5);
+  background:var(--page-rail);
+  border-right:1px solid var(--page-border);
+  display:flex; flex-direction:column; gap:var(--space-5);
+}
+@media (max-width:900px){
+  .rail { position:static; height:auto; border-right:0;
+          border-bottom:1px solid var(--page-border); }
+}
+.rail__mark {
+  font-family:var(--font-display); font-weight:600; font-size:var(--text-lg);
+  letter-spacing:var(--tracking-tight); line-height:1.15; color:var(--page-ink);
+}
+.rail__mark span { display:block; font-family:var(--font-mono); font-size:var(--text-xs);
+  font-weight:400; letter-spacing:var(--tracking-label); text-transform:uppercase;
+  color:var(--green-600); margin-top:var(--space-2); }
+.rail nav { display:flex; flex-direction:column; gap:var(--space-1); }
+.rail a {
+  display:block; padding:var(--space-2) var(--space-3);
+  border-radius:var(--radius-sm);
+  color:var(--page-ink-muted); text-decoration:none;
+  font-size:var(--text-sm);
+  transition:background-color var(--duration-fast) var(--ease-standard),
+             color var(--duration-fast) var(--ease-standard);
+}
+.rail a:hover { background:var(--page-bg); color:var(--page-ink); }
+.rail__group {
+  font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase;
+  letter-spacing:var(--tracking-label); color:var(--page-ink-subtle);
+  padding:var(--space-4) var(--space-3) var(--space-1);
+}
+
+/* -- Content ------------------------------------------------------------- */
+.main { min-width:0; padding:0 0 var(--space-12); }
+.wrap { max-width:1000px; margin-inline:auto; padding-inline:var(--space-6); }
+@media (max-width:600px){ .wrap { padding-inline:var(--space-4); } }
+
+section { padding-block:var(--space-10); border-top:1px solid var(--page-border); }
+section:first-of-type { border-top:0; }
+
+h1,h2,h3,h4 { font-family:var(--font-display); color:var(--page-ink);
+              text-wrap:balance; margin:0; }
+h2 { font-size:var(--text-h2); font-weight:600; line-height:var(--leading-tight);
+     letter-spacing:var(--tracking-tight); }
+h3 { font-size:var(--text-h4); font-weight:600; line-height:var(--leading-snug);
+     letter-spacing:var(--tracking-snug); margin-top:var(--space-8); }
+h4 { font-size:var(--text-h5); font-weight:500; margin-top:var(--space-6); }
+p  { margin:var(--space-4) 0 0; max-width:var(--measure); color:var(--page-ink-muted); }
+p.lead { font-size:var(--text-lg); color:var(--page-ink); max-width:var(--measure-narrow); }
+section > .wrap > h2 + p { margin-top:var(--space-3); }
+
+.eyebrow {
+  font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+  letter-spacing:var(--tracking-label); text-transform:uppercase;
+  color:var(--green-600); margin:0 0 var(--space-3);
+}
+:root[data-theme="dark"] .eyebrow { color:var(--green-300); }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .eyebrow { color:var(--green-300); }
+}
+
+code, .mono { font-family:var(--font-mono); font-size:0.86em; }
+code { background:var(--page-surface); border:1px solid var(--page-border);
+       border-radius:4px; padding:0.1em 0.35em; color:var(--page-ink); }
+
+/* ==========================================================================
+   Hero — the thesis. The system exists because of this measurement.
+   ========================================================================== */
+.hero { padding-block:var(--space-10) var(--space-9); border-top:0; }
+.hero h1 {
+  font-size:var(--text-h1); font-weight:600;
+  line-height:var(--leading-tight); letter-spacing:var(--tracking-tight);
+  max-width:20ch;
+}
+.hero p { max-width:var(--measure-narrow); }
+
+.thesis {
+  margin-top:var(--space-8);
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:var(--space-5);
+}
+.thesis__panel {
+  padding:var(--space-6);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--page-border);
+  background:var(--page-raised);
+  display:flex; flex-direction:column; gap:var(--space-4);
+}
+.thesis__panel--fail { border-color:color-mix(in srgb,#b3242f 35%,transparent); }
+.thesis__panel--pass { border-color:color-mix(in srgb,var(--green-500) 45%,transparent); }
+
+.thesis__verdict {
+  font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+  letter-spacing:var(--tracking-label); text-transform:uppercase;
+  display:flex; align-items:baseline; gap:var(--space-2);
+}
+.thesis__panel--fail .thesis__verdict { color:#b3242f; }
+:root[data-theme="dark"] .thesis__panel--fail .thesis__verdict { color:#ffb3b3; }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .thesis__panel--fail .thesis__verdict { color:#ffb3b3; }
+}
+.thesis__panel--pass .thesis__verdict { color:var(--green-700); }
+:root[data-theme="dark"] .thesis__panel--pass .thesis__verdict { color:var(--green-300); }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .thesis__panel--pass .thesis__verdict { color:var(--green-300); }
+}
+
+.thesis__ratio {
+  font-family:var(--font-display); font-size:var(--text-h2); font-weight:600;
+  letter-spacing:var(--tracking-tight); line-height:1;
+  font-variant-numeric:tabular-nums; color:var(--page-ink);
+}
+.thesis__stage {
+  padding:var(--space-6); border-radius:var(--radius-md);
+  background:#ffffff; display:flex; justify-content:center;
+}
+.thesis__note { font-size:var(--text-sm); color:var(--page-ink-muted); margin:0; }
+
+/* The two buttons under test, drawn literally. */
+.demo-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; padding-inline:var(--space-5);
+  border:0; border-radius:var(--radius-md);
+  font-family:var(--font-body); font-size:var(--text-base); font-weight:500;
+  line-height:1; background:#86bd42;
+}
+.demo-btn--old { color:#ffffff; }
+.demo-btn--new { color:#1c3830; }
+
+/* ==========================================================================
+   Swatches
+   ========================================================================== */
+.ramp { display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr));
+        gap:var(--space-2); margin-top:var(--space-5); }
+.swatch { border-radius:var(--radius-md); overflow:hidden;
+          border:1px solid var(--page-border); background:var(--page-raised); }
+.swatch__chip { height:64px; }
+.swatch__meta { padding:var(--space-3); display:flex; flex-direction:column; gap:2px; }
+.swatch__name { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+                color:var(--page-ink); }
+.swatch__hex  { font-family:var(--font-mono); font-size:var(--text-xs);
+                color:var(--page-ink-subtle); text-transform:uppercase; }
+.swatch__note { font-size:var(--text-xs); color:var(--page-ink-muted); line-height:1.35;
+                margin-top:var(--space-1); }
+
+.callout {
+  margin-top:var(--space-6); padding:var(--space-5);
+  border-radius:var(--radius-md);
+  border:1px solid var(--page-border);
+  border-left:3px solid var(--green-500);
+  background:var(--page-surface);
+}
+.callout p { margin-top:0; color:var(--page-ink); }
+.callout p + p { margin-top:var(--space-3); }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.table-scroll { overflow-x:auto; margin-top:var(--space-5); }
+table { width:100%; border-collapse:collapse; font-size:var(--text-sm); }
+th, td { text-align:left; padding:var(--space-3) var(--space-4);
+         border-bottom:1px solid var(--page-border); vertical-align:top; }
+th { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+     letter-spacing:var(--tracking-wide); text-transform:uppercase;
+     color:var(--page-ink-subtle); white-space:nowrap; }
+td { color:var(--page-ink-muted); }
+td.mono, td .mono { color:var(--page-ink); }
+td.num { text-align:right; font-family:var(--font-mono);
+         font-variant-numeric:tabular-nums; color:var(--page-ink); white-space:nowrap; }
+.verdict { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+           letter-spacing:var(--tracking-wide); color:var(--green-700); }
+:root[data-theme="dark"] .verdict { color:var(--green-300); }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .verdict { color:var(--green-300); }
+}
+tbody tr:hover { background:var(--page-surface); }
+
+/* ==========================================================================
+   Type specimens
+   ========================================================================== */
+.specimen { border-top:1px solid var(--page-border); padding-block:var(--space-5);
+            display:grid; grid-template-columns:132px minmax(0,1fr); gap:var(--space-5);
+            align-items:baseline; }
+@media (max-width:600px){ .specimen { grid-template-columns:1fr; gap:var(--space-2); } }
+.specimen__key { font-family:var(--font-mono); font-size:var(--text-xs);
+                 color:var(--page-ink-subtle); line-height:1.5; }
+.specimen__key b { display:block; color:var(--page-ink); font-weight:500; }
+.specimen__sample { color:var(--page-ink); min-width:0; }
+
+/* ==========================================================================
+   Scale strips
+   ========================================================================== */
+.scale { display:flex; flex-direction:column; gap:var(--space-2); margin-top:var(--space-5); }
+.scale__row { display:grid; grid-template-columns:96px 72px minmax(0,1fr);
+              gap:var(--space-4); align-items:center; }
+.scale__bar { height:14px; border-radius:3px; background:var(--green-400); }
+.scale__row .mono { font-size:var(--text-xs); color:var(--page-ink-subtle); }
+.scale__row .mono b { color:var(--page-ink); font-weight:500; }
+
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+         gap:var(--space-4); margin-top:var(--space-5); }
+.tile { padding:var(--space-5); background:var(--page-raised);
+        border:1px solid var(--page-border); text-align:center; }
+.tile__label { font-family:var(--font-mono); font-size:var(--text-xs);
+               color:var(--page-ink-subtle); margin-top:var(--space-3); display:block; }
+.tile__label b { display:block; color:var(--page-ink); font-weight:500; }
+
+.elev-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+             gap:var(--space-5); margin-top:var(--space-5);
+             background:var(--page-surface); padding:var(--space-6);
+             border-radius:var(--radius-lg); border:1px solid var(--page-border); }
+.elev { height:96px; border-radius:var(--radius-md); background:var(--page-raised);
+        display:flex; align-items:center; justify-content:center;
+        font-family:var(--font-mono); font-size:var(--text-xs); color:var(--page-ink-muted); }
+
+/* ==========================================================================
+   Component demo canvases
+   ========================================================================== */
+.pair { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+        gap:var(--space-4); margin-top:var(--space-5); }
+.canvas { padding:var(--space-6); border-radius:var(--radius-lg);
+          border:1px solid var(--page-border); }
+.canvas__tag { font-family:var(--font-mono); font-size:var(--text-xs);
+               letter-spacing:var(--tracking-label); text-transform:uppercase;
+               color:var(--ink-subtle); margin:0 0 var(--space-5); }
+.row { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; }
+.stack { display:flex; flex-direction:column; gap:var(--space-4); }
+
+/* Real component CSS, straight from the system. */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+       min-height:44px; padding-inline:var(--space-5);
+       border:1px solid transparent; border-radius:var(--radius-md);
+       font-family:var(--font-body); font-size:var(--text-base); font-weight:500;
+       line-height:1; text-decoration:none; cursor:pointer;
+       transition:background-color var(--duration-fast) var(--ease-standard),
+                  transform var(--duration-fast) var(--ease-standard),
+                  border-color var(--duration-fast) var(--ease-standard); }
+.btn:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+.btn--primary { background:var(--brand); color:var(--on-brand); }
+.btn--primary:hover { background:var(--brand-hover); transform:translateY(-1px); }
+.btn--primary:active { background:var(--brand-active); transform:translateY(0); }
+.btn--secondary { background:transparent; color:var(--ink); border-color:var(--border-strong); }
+.btn--secondary:hover { background:var(--surface-sunken); border-color:var(--ink-muted); }
+.btn--ghost { background:transparent; color:var(--ink); }
+.btn--ghost:hover { background:var(--surface-sunken); }
+.btn--link { min-height:0; padding:0; background:none; color:var(--brand-text);
+             text-decoration:underline; text-underline-offset:.2em; }
+.btn[disabled] { background:var(--surface-sunken); color:var(--ink-subtle);
+                 border-color:var(--border); cursor:not-allowed; transform:none; }
+.btn--sm { min-height:36px; padding-inline:var(--space-4); font-size:var(--text-sm); }
+.btn--lg { min-height:52px; padding-inline:var(--space-6); font-size:var(--text-lg); }
+
+.tag { display:inline-flex; align-items:center; gap:var(--space-1);
+       padding:var(--space-1) var(--space-3);
+       border:1px solid var(--border); border-radius:var(--radius-sm);
+       background:var(--surface-sunken); color:var(--ink-muted);
+       font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-wide);
+       white-space:nowrap; }
+.tag--on { background:var(--brand); border-color:var(--brand); color:var(--on-brand); }
+
+.badge { display:inline-flex; align-items:center; padding:var(--space-1) var(--space-3);
+         border-radius:var(--radius-pill); background:var(--accent); color:var(--on-accent);
+         font-size:var(--text-xs); font-weight:600;
+         letter-spacing:var(--tracking-wide); text-transform:uppercase; }
+
+.demo-card { display:flex; flex-direction:column;
+             background:var(--surface-raised); border:1px solid var(--border);
+             border-radius:var(--radius-lg); overflow:hidden;
+             transition:box-shadow var(--duration-base) var(--ease-standard),
+                        transform var(--duration-base) var(--ease-standard),
+                        border-color var(--duration-base) var(--ease-standard); }
+.demo-card:hover { border-color:var(--border-strong); box-shadow:var(--elev-card);
+                   transform:translateY(-2px); }
+.demo-card__media { height:120px;
+  background:linear-gradient(135deg,var(--green-200),var(--green-400)); }
+.canvas--dark .demo-card__media {
+  background:linear-gradient(135deg,var(--green-800),var(--green-600)); }
+.demo-card__body { padding:var(--space-5); display:flex; flex-direction:column;
+                   gap:var(--space-3); }
+.demo-card__eyebrow { font-family:var(--font-body); font-size:var(--text-xs); font-weight:600;
+                      letter-spacing:var(--tracking-label); text-transform:uppercase;
+                      color:var(--brand-text); }
+.demo-card__title { font-family:var(--font-display); font-size:var(--text-h4);
+                    font-weight:500; letter-spacing:var(--tracking-snug);
+                    line-height:var(--leading-snug); color:var(--ink); }
+.demo-card__desc { font-size:var(--text-sm); color:var(--ink-muted); margin:0; }
+
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+         gap:var(--space-5); }
+.stat__value { font-family:var(--font-display); font-size:var(--text-h3); font-weight:600;
+               line-height:1.02; letter-spacing:var(--tracking-display);
+               font-variant-numeric:tabular-nums; color:var(--ink); }
+.stat__label { font-size:var(--text-sm); color:var(--ink-muted); max-width:24ch;
+               margin-top:var(--space-2); }
+
+.quote { max-width:var(--measure-narrow); }
+.quote blockquote { margin:0; font-family:var(--font-display); font-size:var(--text-h4);
+                    font-weight:500; line-height:var(--leading-snug);
+                    letter-spacing:var(--tracking-snug); color:var(--ink);
+                    text-wrap:balance; }
+.quote figcaption { margin-top:var(--space-4); font-size:var(--text-sm);
+                    color:var(--ink-muted); }
+.quote figcaption b { display:block; color:var(--ink); font-weight:500; }
+
+.field { display:flex; flex-direction:column; gap:var(--space-2); max-width:340px; }
+.field label { font-size:var(--text-sm); font-weight:500; color:var(--ink); }
+.field input { min-height:44px; padding:var(--space-3) var(--space-4);
+               background:var(--surface); border:1px solid var(--border-strong);
+               border-radius:var(--radius-sm); font-family:var(--font-body);
+               font-size:var(--text-base); color:var(--ink); }
+.field input::placeholder { color:var(--ink-subtle); }
+.field input:focus { outline:none; border-color:var(--focus);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 25%,transparent); }
+.field small { font-size:var(--text-sm); color:var(--ink-muted); }
+
+details.demo { border-bottom:1px solid var(--border); }
+details.demo summary { display:flex; justify-content:space-between; align-items:center;
+  gap:var(--space-4); padding:var(--space-4) 0; cursor:pointer; list-style:none;
+  font-family:var(--font-display); font-size:var(--text-h5); font-weight:500; color:var(--ink); }
+details.demo summary::-webkit-details-marker { display:none; }
+details.demo summary::after { content:"+"; font-family:var(--font-mono); color:var(--brand-text);
+  transition:transform var(--duration-base) var(--ease-standard); }
+details.demo[open] summary::after { transform:rotate(45deg); }
+details.demo p { padding-bottom:var(--space-4); color:var(--ink-muted); margin:0;
+                 max-width:var(--measure); }
+
+.dont-do { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+           gap:var(--space-4); margin-top:var(--space-5); }
+.dd { padding:var(--space-5); border-radius:var(--radius-md);
+      border:1px solid var(--page-border); background:var(--page-raised); }
+.dd__k { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+         letter-spacing:var(--tracking-label); text-transform:uppercase;
+         margin:0 0 var(--space-3); }
+.dd--no .dd__k { color:#b3242f; }
+.dd--yes .dd__k { color:var(--green-700); }
+:root[data-theme="dark"] .dd--no .dd__k { color:#ffb3b3; }
+:root[data-theme="dark"] .dd--yes .dd__k { color:var(--green-300); }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .dd--no .dd__k { color:#ffb3b3; }
+  :root:not([data-theme="light"]) .dd--yes .dd__k { color:var(--green-300); }
+}
+.dd p { margin:0; font-size:var(--text-sm); }
+
+.steps { list-style:none; margin:var(--space-5) 0 0; padding:0;
+         display:flex; flex-direction:column; gap:var(--space-4); counter-reset:step; }
+.steps li { display:grid; grid-template-columns:30px minmax(0,1fr); gap:var(--space-4);
+            align-items:start; }
+.steps li::before { counter-increment:step; content:counter(step);
+  font-family:var(--font-mono); font-size:var(--text-xs); font-weight:500;
+  color:var(--green-700); border:1px solid var(--page-border); border-radius:var(--radius-pill);
+  width:30px; height:30px; display:flex; align-items:center; justify-content:center; }
+:root[data-theme="dark"] .steps li::before { color:var(--green-300); }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .steps li::before { color:var(--green-300); }
+}
+.steps b { color:var(--page-ink); font-weight:500; }
+.steps p { margin:var(--space-1) 0 0; font-size:var(--text-sm); }
+
+footer.foot { padding:var(--space-9) 0 var(--space-10); border-top:1px solid var(--page-border); }
+footer.foot p { font-size:var(--text-sm); }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
+</style>
+
+<div class="layout">
+  <aside class="rail">
+    <div class="rail__mark">Avocadots<span>Design system</span></div>
+    <nav>
+      <a href="#why">Why this exists</a>
+      <div class="rail__group">Foundations</div>
+      <a href="#colour">Colour</a>
+      <a href="#type">Typography</a>
+      <a href="#space">Space &amp; radius</a>
+      <a href="#elevation">Elevation</a>
+      <a href="#motion">Motion</a>
+      <div class="rail__group">Components</div>
+      <a href="#buttons">Buttons</a>
+      <a href="#cards">Cards &amp; tags</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#inputs">Inputs &amp; disclosure</a>
+      <div class="rail__group">Practice</div>
+      <a href="#content">Content patterns</a>
+      <a href="#wix">Applying it in Wix</a>
+      <a href="#contrast">Contrast record</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <!-- ===================== HERO / THESIS ===================== -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">avocadots.com &middot; September 2026</p>
+        <h1>The brand was fine. The rules were missing.</h1>
+        <p class="lead">One measurement explains this entire system. The primary
+        call-to-action on avocadots.com — the button on the conversion path —
+        sat at less than half the legibility the standard requires.</p>
+
+        <div class="thesis">
+          <div class="thesis__panel thesis__panel--fail">
+            <p class="thesis__verdict">Before &middot; fails AA</p>
+            <div class="thesis__stage">
+              <span class="demo-btn demo-btn--old">Start a project</span>
+            </div>
+            <div class="thesis__ratio">2.24:1</div>
+            <p class="thesis__note">White label on <code>#86bd42</code>.
+            The requirement is 4.5:1.</p>
+          </div>
+          <div class="thesis__panel thesis__panel--pass">
+            <p class="thesis__verdict">After &middot; passes AA</p>
+            <div class="thesis__stage">
+              <span class="demo-btn demo-btn--new">Start a project</span>
+            </div>
+            <div class="thesis__ratio">5.65:1</div>
+            <p class="thesis__note">Deep forest label on the same
+            <code>#86bd42</code>. The green did not change.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><b>The green was never the problem.</b> The problem was that one
+          colour was doing two jobs. As a <i>fill</i> it is excellent. As
+          <i>text</i> it is illegible. Splitting those roles fixes the contrast
+          failure across all 180+ pages without altering the brand.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHY ===================== -->
+    <section id="why">
+      <div class="wrap">
+        <p class="eyebrow">Finding 1 of 7</p>
+        <h2>What the audit found</h2>
+        <p>Measured against the live site, not inferred. Full detail in
+        <code>design-system/audit.md</code>.</p>
+
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>#</th><th>Finding</th><th>Evidence</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="mono">Primary CTA fails accessibility</td><td>Green on white and white on green both measure 2.24:1</td></tr>
+              <tr><td class="num">2</td><td class="mono">Palette sprawl</td><td>Five accents, four ad-hoc greys, plus Wix's stock blue <code>#116dff</code></td></tr>
+              <tr><td class="num">3</td><td class="mono">No radius discipline</td><td>Seven values: 4, 6, 8, 16, 40, 300px, 50%</td></tr>
+              <tr><td class="num">4</td><td class="mono">No elevation system</td><td><code>box-shadow</code> is <code>none</code> almost everywhere</td></tr>
+              <tr><td class="num">5</td><td class="mono">Unshipped content</td><td>"Add paragraph text" and "Tag One / Tag Two" live on the portfolio</td></tr>
+              <tr><td class="num">6</td><td class="mono">Competing CTAs</td><td>Five labels in circulation, plus stray "Add" links</td></tr>
+              <tr><td class="num">7</td><td class="mono">Typography without a scale</td><td>Nine sizes, no letter-spacing rules, no measure limit</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Inventory: roughly 45 static pages, 62 case studies and 74 blog posts.
+        At that size, a rule that isn't written down gets re-decided 180 times.</p>
+      </div>
+    </section>
+
+    <!-- ===================== COLOUR ===================== -->
+    <section id="colour">
+      <div class="wrap">
+        <p class="eyebrow">Foundations</p>
+        <h2>Colour</h2>
+        <p class="lead">Deep forest <code>#1c3830</code> is the darkest shade of the
+        brand green <code>#86bd42</code>. The two colours Avocadots already owned
+        are the two ends of one ramp.</p>
+
+        <h3>Green</h3>
+        <div class="ramp" id="ramp-green"></div>
+
+        <div class="callout">
+          <p><b>Fill and text are different roles.</b>
+          <code>--brand</code> (<code>#86bd42</code>) is a fill — buttons, blocks,
+          accents. <code>--brand-text</code> (<code>#436421</code>) is for green
+          text and links. Never swap them.</p>
+          <p><b>The fill lifts on hover, it does not darken.</b> The label on it is
+          forest ink, so a darker fill would drop the pair to 4.15:1. Lifting to
+          <code>green-300</code> holds 7.09:1.</p>
+        </div>
+
+        <h3>Gold — the single warm accent</h3>
+        <p>Awards, badges, one highlighted statistic. Not a second brand colour.
+        <code>gold-500</code> is a fill only; for gold text use <code>gold-700</code>
+        or darker.</p>
+        <div class="ramp" id="ramp-gold"></div>
+
+        <h3>Neutrals</h3>
+        <p>One ramp with a faint green undertone, so greys sit with the brand
+        instead of fighting it. Replaces <code>#eef0f1</code>, <code>#f0f0f0</code>,
+        <code>#8f8f8f</code> and <code>#6e6e6e</code>.</p>
+        <div class="ramp" id="ramp-neutral"></div>
+
+        <h3>Retired</h3>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Colour</th><th>Was</th><th>Why it's gone</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">#253787</td><td>Navy accent</td><td>Palette sprawl — no role the ramp doesn't cover</td></tr>
+              <tr><td class="mono">#da2c38</td><td>Red accent</td><td>Demoted to the semantic danger role only</td></tr>
+              <tr><td class="mono">#116dff</td><td>Link colour</td><td>Wix's stock blue. Never a brand colour</td></tr>
+              <tr><td class="mono">#eef0f1 &middot; #f0f0f0 &middot; #8f8f8f &middot; #6e6e6e</td><td>Greys</td><td>Superseded by the neutral ramp</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TYPE ===================== -->
+    <section id="type">
+      <div class="wrap">
+        <p class="eyebrow">Foundations</p>
+        <h2>Typography</h2>
+        <p class="lead">The pairing stays: Manrope for display and headings,
+        Poppins for body and interface. What was missing was a scale — nine sizes
+        with no tracking rules and no limit on line length.</p>
+        <div id="type-specimens"></div>
+        <div class="callout">
+          <p><b>Tracking tightens as size grows.</b> Large type at default tracking
+          reads as loose; small type set tight becomes unreadable. The scale
+          encodes this — don't override it.</p>
+          <p><b>Body copy is capped at 68 characters</b> (<code>--measure</code>), and
+          only one <code>--text-display</code> appears per page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SPACE ===================== -->
+    <section id="space">
+      <div class="wrap">
+        <p class="eyebrow">Foundations</p>
+        <h2>Space and radius</h2>
+        <p>4pt base, 8pt rhythm. The value of a spacing scale isn't that 24px beats
+        25px — it's that when everything is on the scale, inconsistency becomes
+        visible instead of invisible.</p>
+        <div class="scale" id="space-scale"></div>
+
+        <h3>Radius — four values, down from seven</h3>
+        <div class="tiles" id="radius-tiles"></div>
+        <p><b>Nesting rule.</b> An inner radius is smaller than its container's. A
+        <code>--radius-md</code> image inside a <code>--radius-lg</code> card looks
+        right; the same radius on both looks like a mistake.</p>
+      </div>
+    </section>
+
+    <!-- ===================== ELEVATION ===================== -->
+    <section id="elevation">
+      <div class="wrap">
+        <p class="eyebrow">Foundations</p>
+        <h2>Elevation</h2>
+        <p>The old site had none. Four levels now, <b>tinted with forest rather than
+        black</b> — black shadows under a warm green palette read as grime, not depth.</p>
+        <div class="elev-grid" id="elev-grid"></div>
+        <div class="callout">
+          <p><b>Border first.</b> On light surfaces prefer a hairline border to a
+          shadow. A border defines an edge honestly; a shadow claims the element is
+          floating, which is usually a lie. The good pattern is border at rest,
+          shadow on hover.</p>
+          <p><b>On the forest canvas, shadows stop working.</b> Levels 1 and 2
+          resolve to <code>none</code>; separation comes from
+          <code>--surface-raised</code> instead.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MOTION ===================== -->
+    <section id="motion">
+      <div class="wrap">
+        <p class="eyebrow">Foundations</p>
+        <h2>Motion</h2>
+        <p>Motion should explain a change, not decorate it. If an animation doesn't
+        help someone understand what just happened, remove it.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Token</th><th class="num">Value</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">--duration-instant</td><td class="num">80ms</td><td>Colour-only changes: hover tint, focus ring</td></tr>
+              <tr><td class="mono">--duration-fast</td><td class="num">140ms</td><td>Buttons, tags, icon flips</td></tr>
+              <tr><td class="mono">--duration-base</td><td class="num">220ms</td><td>The default — cards, hovers, expanding panels</td></tr>
+              <tr><td class="mono">--duration-slow</td><td class="num">360ms</td><td>Menus, drawers, accordions</td></tr>
+              <tr><td class="mono">--duration-entrance</td><td class="num">520ms</td><td>Once-per-element scroll entrances</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dont-do">
+          <div class="dd dd--no">
+            <p class="dd__k">Don't</p>
+            <p>Animate <code>height</code>, <code>top</code> or <code>margin</code>.
+            Each forces layout every frame and janks on mid-range phones.</p>
+          </div>
+          <div class="dd dd--yes">
+            <p class="dd__k">Do</p>
+            <p>Animate <code>transform</code> and <code>opacity</code>. For an
+            accordion, transition <code>grid-template-rows</code> from
+            <code>0fr</code> to <code>1fr</code>.</p>
+          </div>
+          <div class="dd dd--no">
+            <p class="dd__k">Don't</p>
+            <p>Re-run entrances every time an element scrolls back into view, or
+            stagger a list of twenty items.</p>
+          </div>
+          <div class="dd dd--yes">
+            <p class="dd__k">Do</p>
+            <p>Trigger once, then unobserve. Keep hover lifts at 2px and entrance
+            travel under 24px.</p>
+          </div>
+        </div>
+        <p>Every duration token collapses to <code>0ms</code> under
+        <code>prefers-reduced-motion</code>, so anything built on the tokens is
+        already compliant.</p>
+      </div>
+    </section>
+
+    <!-- ===================== BUTTONS ===================== -->
+    <section id="buttons">
+      <div class="wrap">
+        <p class="eyebrow">Components</p>
+        <h2>Buttons</h2>
+        <p>Every specimen below appears on both canvases. The markup is identical —
+        only the surrounding token scope changes.</p>
+
+        <div class="pair">
+          <div class="canvas">
+            <p class="canvas__tag">Light canvas</p>
+            <div class="stack">
+              <div class="row">
+                <button class="btn btn--primary">Start a project</button>
+                <button class="btn btn--secondary">See our work</button>
+                <button class="btn btn--ghost">View all</button>
+              </div>
+              <div class="row">
+                <button class="btn btn--primary btn--sm">Small</button>
+                <button class="btn btn--primary">Default</button>
+                <button class="btn btn--primary btn--lg">Large</button>
+              </div>
+              <div class="row">
+                <button class="btn btn--primary" disabled>Disabled</button>
+                <a class="btn btn--link" href="#buttons">Inline link</a>
+              </div>
+            </div>
+          </div>
+          <div class="canvas canvas--dark">
+            <p class="canvas__tag">Forest canvas &middot; .on-dark</p>
+            <div class="stack">
+              <div class="row">
+                <button class="btn btn--primary">Start a project</button>
+                <button class="btn btn--secondary">See our work</button>
+                <button class="btn btn--ghost">View all</button>
+              </div>
+              <div class="row">
+                <button class="btn btn--primary btn--sm">Small</button>
+                <button class="btn btn--primary">Default</button>
+                <button class="btn btn--primary btn--lg">Large</button>
+              </div>
+              <div class="row">
+                <button class="btn btn--primary" disabled>Disabled</button>
+                <a class="btn btn--link" href="#buttons">Inline link</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>State</th><th>Fill</th><th class="num">Contrast with forest label</th></tr></thead>
+            <tbody>
+              <tr><td>Rest</td><td class="mono">green-400 &nbsp;#86bd42</td><td class="num">5.65:1</td></tr>
+              <tr><td>Hover</td><td class="mono">green-300 &nbsp;#a8ce76</td><td class="num">7.09:1</td></tr>
+              <tr><td>Active</td><td class="mono">green-200 &nbsp;#c7e0a6</td><td class="num">8.83:1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>One primary button per section.</b> The homepage currently pairs
+        "Work with us" with "Schedule a Meeting" as equals — those are a primary
+        and a secondary. Two primaries means neither is.</p>
+      </div>
+    </section>
+
+    <!-- ===================== CARDS ===================== -->
+    <section id="cards">
+      <div class="wrap">
+        <p class="eyebrow">Components</p>
+        <h2>Cards and tags</h2>
+        <p>The project card is how the portfolio is judged. Two rules the current
+        cards break: tags come from a fixed taxonomy, never free text; and the
+        description line states a <i>result</i>, not a category.</p>
+
+        <div class="pair">
+          <div class="canvas">
+            <p class="canvas__tag">Light canvas</p>
+            <div class="stack">
+              <article class="demo-card">
+                <div class="demo-card__media"></div>
+                <div class="demo-card__body">
+                  <span class="demo-card__eyebrow">Web design</span>
+                  <h4 class="demo-card__title">Limassol Agora</h4>
+                  <p class="demo-card__desc">A market's identity rebuilt around the
+                  stalls rather than the building.</p>
+                  <div class="row">
+                    <span class="tag">Retail &amp; markets</span>
+                    <span class="tag">Wix Studio</span>
+                  </div>
+                </div>
+              </article>
+              <div class="row">
+                <span class="tag tag--on">Branding</span>
+                <span class="tag">Web design</span>
+                <span class="tag">E-commerce</span>
+                <span class="badge">Gold winner</span>
+              </div>
+            </div>
+          </div>
+          <div class="canvas canvas--dark">
+            <p class="canvas__tag">Forest canvas &middot; .on-dark</p>
+            <div class="stack">
+              <article class="demo-card">
+                <div class="demo-card__media"></div>
+                <div class="demo-card__body">
+                  <span class="demo-card__eyebrow">Web design</span>
+                  <h4 class="demo-card__title">Limassol Agora</h4>
+                  <p class="demo-card__desc">A market's identity rebuilt around the
+                  stalls rather than the building.</p>
+                  <div class="row">
+                    <span class="tag">Retail &amp; markets</span>
+                    <span class="tag">Wix Studio</span>
+                  </div>
+                </div>
+              </article>
+              <div class="row">
+                <span class="tag tag--on">Branding</span>
+                <span class="tag">Web design</span>
+                <span class="tag">E-commerce</span>
+                <span class="badge">Gold winner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dont-do">
+          <div class="dd dd--no">
+            <p class="dd__k">On the site today</p>
+            <p>Cards render the literal strings <b>"Tag One", "Tag Two",
+            "Tag Three"</b> — unedited component defaults, live on the portfolio.</p>
+          </div>
+          <div class="dd dd--yes">
+            <p class="dd__k">Instead</p>
+            <p>A closed vocabulary of 9 service tags and 12 sector tags, held as CMS
+            reference fields so drift is structurally impossible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EVIDENCE ===================== -->
+    <section id="evidence">
+      <div class="wrap">
+        <p class="eyebrow">Components</p>
+        <h2>Evidence</h2>
+        <p class="lead">The homepage claims 150+ companies helped. Not one case
+        study carries a number. These are the components that close that gap.</p>
+
+        <div class="pair">
+          <div class="canvas">
+            <p class="canvas__tag">Stat block &middot; light</p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat__value">+38%</div>
+                <p class="stat__label">more enquiries, first 90 days</p>
+              </div>
+              <div class="stat">
+                <div class="stat__value">1.2s</div>
+                <p class="stat__label">mobile load time, from 4.1s</p>
+              </div>
+              <div class="stat">
+                <div class="stat__value">62</div>
+                <p class="stat__label">traders listed, from zero</p>
+              </div>
+            </div>
+          </div>
+          <div class="canvas canvas--dark">
+            <p class="canvas__tag">Testimonial &middot; forest</p>
+            <figure class="quote">
+              <blockquote>&ldquo;They asked what we wanted to measure before they
+              asked what we wanted it to look like.&rdquo;</blockquote>
+              <figcaption>
+                <b>Name, role</b>
+                Company — attribution is mandatory
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><b>Never fabricate a number.</b> Where a project has no measured
+          outcome, use an honest qualitative one — "the market now updates its own
+          trader list weekly, without us" — and leave the stat row out. A made-up
+          figure is a liability, not a case study.</p>
+          <p>The reason these pages have no numbers is almost certainly that nobody
+          captured a baseline. Add <i>"what will we measure, and what is it
+          today?"</i> to project kick-off.</p>
+        </div>
+
+        <p>Stat values use <code>tabular-nums</code> so a row of figures aligns, and
+        every label names its measurement window. A percentage without a timeframe
+        is not evidence.</p>
+      </div>
+    </section>
+
+    <!-- ===================== INPUTS ===================== -->
+    <section id="inputs">
+      <div class="wrap">
+        <p class="eyebrow">Components</p>
+        <h2>Inputs and disclosure</h2>
+        <div class="pair">
+          <div class="canvas">
+            <p class="canvas__tag">Field &middot; light</p>
+            <div class="field">
+              <label for="demo-email">Work email</label>
+              <input id="demo-email" type="email" placeholder="name@company.com">
+              <small>We reply within one working day.</small>
+            </div>
+          </div>
+          <div class="canvas canvas--dark">
+            <p class="canvas__tag">Accordion &middot; forest</p>
+            <details class="demo" open>
+              <summary>How much does a website cost?</summary>
+              <p>Answer in the first sentence, then elaborate. An FAQ that dodges
+              the pricing question loses trust rather than protecting margin.</p>
+            </details>
+            <details class="demo">
+              <summary>Do you work with startups?</summary>
+              <p>Multiple panels can be open at once — auto-closing the previous
+              answer is comparison-hostile on an FAQ.</p>
+            </details>
+          </div>
+        </div>
+        <p><b>Every field has a visible label.</b> Placeholder text is not a label —
+        it disappears the moment someone types, so anyone interrupted mid-form loses
+        the question. Input font size stays at 16px minimum, or iOS Safari zooms on
+        focus.</p>
+      </div>
+    </section>
+
+    <!-- ===================== CONTENT ===================== -->
+    <section id="content">
+      <div class="wrap">
+        <p class="eyebrow">Practice</p>
+        <h2>Content patterns</h2>
+
+        <h3>The case-study template</h3>
+        <p>Every case study says what was built. None says what changed. The
+        template makes the outcome mandatory.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Section</th><th>Length</th><th>What it has to do</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">Outcome line</td><td class="num">12–20 w</td><td>What changed, in one sentence. Not what was built</td></tr>
+              <tr><td class="mono">Facts strip</td><td class="num">5 fields</td><td>Sector · Market · Services · Platform · Year</td></tr>
+              <tr><td class="mono">Challenge</td><td class="num">60–90 w</td><td>What was failing, and what it cost them</td></tr>
+              <tr><td class="mono">Approach</td><td class="num">90–140 w</td><td>Two or three decisions, each with its reasoning</td></tr>
+              <tr><td class="mono">Outcome</td><td class="num">3 metrics</td><td>Each with a measurement window and a source</td></tr>
+              <tr><td class="mono">Testimonial</td><td class="num">2–4 lines</td><td>Named, or omitted entirely</td></tr>
+              <tr><td class="mono">Next project</td><td class="num">2–3 links</td><td>Matched by sector or service. Never a dead end</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Roughly 200–320 words. Short enough to be read, long enough to prove
+        something.</p>
+
+        <h3>Calls to action</h3>
+        <p>Five labels are currently in circulation, plus stray links labelled
+        <b>"Add"</b> — unedited defaults that should simply be deleted. The
+        approved set:</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Label</th><th>Use</th><th>Level</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">Start a project</td><td>The main conversion action</td><td>Primary</td></tr>
+              <tr><td class="mono">Book a call</td><td>Scheduling links</td><td>Primary</td></tr>
+              <tr><td class="mono">See our work</td><td>To the portfolio</td><td>Secondary</td></tr>
+              <tr><td class="mono">Read the case study</td><td>Project card to case study</td><td>Secondary</td></tr>
+              <tr><td class="mono">View service</td><td>Service card to service page</td><td>Secondary</td></tr>
+              <tr><td class="mono">Get in touch</td><td>Footer, low-commitment</td><td>Tertiary</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Never "Click here", "Learn more" or "Submit". Link text has to make sense
+        out of context — a screen-reader user listing links hears eight identical
+        "Learn more"s.</p>
+      </div>
+    </section>
+
+    <!-- ===================== WIX ===================== -->
+    <section id="wix">
+      <div class="wrap">
+        <p class="eyebrow">Practice</p>
+        <h2>Applying it in Wix Studio</h2>
+        <p class="lead">The site stays on Wix. There is no API for editor-side
+        design settings, so the colour and type layers are entered by hand — which
+        is exactly why the mapping is written down.</p>
+
+        <p>Twenty of Wix's twenty-five Site Colour slots are used; five are held for
+        growth. The first six keep Wix's built-in roles, so Wix's own components
+        inherit the right colours automatically.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th class="num">Slot</th><th>Rename to</th><th>Value</th><th>Wix's role</th></tr></thead>
+            <tbody id="wix-slots"></tbody>
+          </table>
+        </div>
+
+        <h3>Rollout order</h3>
+        <ol class="steps">
+          <li><div><b>Site Colours and Text Themes.</b><p>Highest leverage — this
+          alone fixes the contrast failure across all 180+ pages. Do the
+          links-and-actions slot first.</p></div></li>
+          <li><div><b>Header and footer.</b><p>Seen on every page. Resolve the
+          double header CTA while you're there.</p></div></li>
+          <li><div><b>Templates, not pages.</b><p>The case-study and listing layouts
+          are CMS-driven — fixing a template fixes every page built on it. This is
+          where "Tag One" dies.</p></div></li>
+          <li><div><b>The placeholder sweep.</b><p>Search all 62 case studies for
+          "Add paragraph text". Hours of work, and it stops the portfolio
+          contradicting the pitch.</p></div></li>
+          <li><div><b>High-traffic pages,</b> then the long tail.<p>Home, Services,
+          Projects, Contact, About — then the remaining service pages and posts.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== CONTRAST ===================== -->
+    <section id="contrast">
+      <div class="wrap">
+        <p class="eyebrow">Practice</p>
+        <h2>Contrast record</h2>
+        <p>Every pairing the system ships, in both contexts. This table is
+        <b>generated</b> by <code>verify-contrast.mjs</code>, which parses the token
+        file, resolves the semantic layer through its aliases, flattens translucent
+        colours over their backdrop, and exits non-zero if anything misses target.</p>
+        <p class="mono" id="contrast-summary"></p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Context</th><th>Pair</th><th>Tokens</th><th class="num">Ratio</th><th class="num">Target</th><th></th></tr></thead>
+            <tbody id="contrast-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="wrap">
+        <p>Avocadots Design System &middot; built with its own tokens. Source in
+        <code>design-system/</code>; run <code>node design-system/verify-contrast.mjs</code>
+        after any colour change.</p>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script>
+/* Swatch ramps ------------------------------------------------------------ */
+const ramps = {
+  'ramp-green': [
+    ['green-50','#f2f8ea',''],['green-100','#e2efd0',''],['green-200','#c7e0a6','Active fill'],
+    ['green-300','#a8ce76','Hover fill'],['green-400','#86bd42','Brand fill. Never text on white'],
+    ['green-500','#6ea233',''],['green-600','#57822a','Focus ring'],
+    ['green-700','#436421','Brand text and links'],['green-800','#334c1a',''],
+    ['green-850','#24443a','Raised, on dark'],['green-900','#1c3830','Ink · dark surface'],
+    ['green-950','#0f1f1a','']
+  ],
+  'ramp-gold': [
+    ['gold-100','#fdf3d4',''],['gold-300','#f4dc7e','Warning, on dark'],
+    ['gold-500','#eac435','Accent fill only'],['gold-700','#8d710b','Lowest legible as text'],
+    ['gold-900','#6b5507','']
+  ],
+  'ramp-neutral': [
+    ['neutral-0','#ffffff',''],['neutral-50','#f8faf8','Sunken surface'],
+    ['neutral-100','#f0f3f0',''],['neutral-200','#e2e7e3','Border'],
+    ['neutral-300','#c9d1cb','Border strong'],['neutral-400','#a3aea6','Muted ink, on dark'],
+    ['neutral-500','#7d8a80','Subtle ink'],['neutral-600','#5e6b62','Muted ink'],
+    ['neutral-700','#46514a',''],['neutral-800','#303833',''],['neutral-900','#1a1f1c','']
+  ]
+};
+for (const [id, list] of Object.entries(ramps)) {
+  document.getElementById(id).innerHTML = list.map(([name, hex, note]) => `
+    <div class="swatch">
+      <div class="swatch__chip" style="background:${hex}"></div>
+      <div class="swatch__meta">
+        <span class="swatch__name">${name}</span>
+        <span class="swatch__hex">${hex}</span>
+        ${note ? `<span class="swatch__note">${note}</span>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+/* Type specimens ---------------------------------------------------------- */
+const type = [
+  ['--text-display','44 → 80','Manrope 600','var(--text-display)','600','1.02','-0.035em','var(--font-display)','Growth isn’t luck.'],
+  ['--text-h1','36 → 60','Manrope 600','var(--text-h1)','600','1.12','-0.02em','var(--font-display)','Projects that speak for themselves'],
+  ['--text-h2','30 → 46','Manrope 600','var(--text-h2)','600','1.12','-0.02em','var(--font-display)','Not services. Not silos. One engine.'],
+  ['--text-h3','24 → 34','Manrope 600','var(--text-h3)','600','1.25','-0.01em','var(--font-display)','Branding that connects and performs'],
+  ['--text-h4','20 → 26','Manrope 500','var(--text-h4)','500','1.25','-0.01em','var(--font-display)','Limassol Agora'],
+  ['--text-h5','18 → 21','Manrope 500','var(--text-h5)','500','1.25','0','var(--font-display)','How much does a website cost?'],
+  ['--text-lg','18','Poppins 400','var(--text-lg)','400','1.65','0','var(--font-body)','We’ve helped 150+ companies push the limits and start scaling with clarity.'],
+  ['--text-base','16','Poppins 400','var(--text-base)','400','1.5','0','var(--font-body)','Your brand tells your story and we make it clear, consistent, and impossible to forget.'],
+  ['--text-sm','14','Poppins 400','var(--text-sm)','400','1.5','0','var(--font-body)','Secondary copy, captions and card metadata.'],
+  ['--text-xs','12','Poppins 500 · uppercase','var(--text-xs)','500','1.5','0.08em','var(--font-body)','Eyebrow label']
+];
+document.getElementById('type-specimens').innerHTML = type.map(
+  ([tok, px, face, size, w, lh, tr, fam, text]) => `
+  <div class="specimen">
+    <div class="specimen__key"><b>${tok}</b>${px}px<br>${face}<br>${lh} / ${tr}</div>
+    <div class="specimen__sample" style="font-family:${fam};font-size:${size};font-weight:${w};line-height:${lh};letter-spacing:${tr};${tr === '0.08em' ? 'text-transform:uppercase;' : ''}">${text}</div>
+  </div>`).join('');
+
+/* Space scale ------------------------------------------------------------- */
+const space = [['1',4],['2',8],['3',12],['4',16],['5',24],['6',32],['7',40],['8',48],['9',64],['10',80],['11',96],['12',128]];
+document.getElementById('space-scale').innerHTML = space.map(([n, px]) => `
+  <div class="scale__row">
+    <span class="mono"><b>--space-${n}</b></span>
+    <span class="mono">${px}px</span>
+    <div class="scale__bar" style="width:${(px / 128) * 100}%"></div>
+  </div>`).join('');
+
+/* Radius ------------------------------------------------------------------ */
+const radii = [['--radius-sm','6px','Inputs, tags, chips'],['--radius-md','10px','Buttons, small cards'],
+               ['--radius-lg','16px','Cards, media, panels'],['--radius-pill','999px','Chips, avatars']];
+document.getElementById('radius-tiles').innerHTML = radii.map(([tok, v, use]) => `
+  <div class="tile" style="border-radius:${v}">
+    <span class="tile__label"><b>${tok}</b>${v}<br>${use}</span>
+  </div>`).join('');
+
+/* Elevation --------------------------------------------------------------- */
+document.getElementById('elev-grid').innerHTML = [0,1,2,3,4].map(n => `
+  <div class="elev" style="box-shadow:${n === 0 ? 'none' : `var(--elevation-${n})`}">level ${n}</div>`).join('');
+
+/* Wix slots --------------------------------------------------------------- */
+const slots = [
+  [1,'Page background','#ffffff','Primary background'],
+  [2,'Surface sunken','#f8faf8','Secondary background'],
+  [3,'Disabled','#c9d1cb','Disabled states'],
+  [4,'Ink muted','#5e6b62','Secondary text'],
+  [5,'Ink','#1c3830','Primary text'],
+  [6,'Brand text','#436421','Links and actions'],
+  [7,'Brand fill','#86bd42','—'],
+  [8,'Brand fill hover','#a8ce76','—'],
+  [9,'Brand fill active','#c7e0a6','—'],
+  [10,'Brand text hover','#334c1a','—'],
+  [11,'Focus ring','#57822a','—'],
+  [12,'Tint 50','#f2f8ea','—'],
+  [13,'Tint 100','#e2efd0','—'],
+  [14,'Forest raised','#24443a','—'],
+  [15,'Forest deep','#0f1f1a','—'],
+  [16,'Border','#e2e7e3','—'],
+  [17,'Ink subtle','#7d8a80','—'],
+  [18,'Ink muted on dark','#a3aea6','—'],
+  [19,'Accent gold','#eac435','—'],
+  [20,'Accent gold tint','#fdf3d4','—']
+];
+document.getElementById('wix-slots').innerHTML = slots.map(([n, name, hex, role]) => `
+  <tr>
+    <td class="num">${n}</td>
+    <td class="mono">${name}</td>
+    <td class="mono"><span style="display:inline-block;width:11px;height:11px;border-radius:2px;background:${hex};border:1px solid rgba(128,128,128,.35);vertical-align:-1px;margin-right:7px"></span>${hex}</td>
+    <td>${role}</td>
+  </tr>`).join('');
+
+/* Contrast table ---------------------------------------------------------- */
+const contrast = [{"ctx": "Light", "desc": "Body ink on page background", "tokens": "`--ink` on `--bg`", "ratio": "12.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Muted ink on page background", "tokens": "`--ink-muted` on `--bg`", "ratio": "5.59:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Subtle ink — large text / UI only", "tokens": "`--ink-subtle` on `--bg`", "ratio": "3.61:1", "target": "3.0:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Ink on sunken surface", "tokens": "`--ink` on `--surface-sunken`", "ratio": "12.08:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Ink on accent tint surface", "tokens": "`--ink` on `--surface-accent`", "ratio": "11.70:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Muted ink on sunken surface", "tokens": "`--ink-muted` on `--surface-sunken`", "ratio": "5.33:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Button label on brand fill", "tokens": "`--on-brand` on `--brand`", "ratio": "5.65:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Button label on brand hover fill", "tokens": "`--on-brand` on `--brand-hover`", "ratio": "7.09:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Label on accent fill", "tokens": "`--on-accent` on `--accent`", "ratio": "7.51:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Brand link text on background", "tokens": "`--brand-text` on `--bg`", "ratio": "6.81:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Brand link hover on background", "tokens": "`--brand-text-hover` on `--bg`", "ratio": "9.59:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Brand link on sunken surface", "tokens": "`--brand-text` on `--surface-sunken`", "ratio": "6.49:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Focus ring against background", "tokens": "`--focus` on `--bg`", "ratio": "4.53:1", "target": "3.0:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Hairline border visibility", "tokens": "`--border-strong` on `--bg`", "ratio": "1.56:1", "target": "1.2:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Success text", "tokens": "`--success` on `--bg`", "ratio": "5.38:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Warning text", "tokens": "`--warning` on `--bg`", "ratio": "4.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Danger text", "tokens": "`--danger` on `--bg`", "ratio": "6.54:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Light", "desc": "Inverse ink on inverse surface", "tokens": "`--ink-inverse` on `--surface-inverse`", "ratio": "12.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Body ink on page background", "tokens": "`--ink` on `--bg`", "ratio": "12.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Muted ink on page background", "tokens": "`--ink-muted` on `--bg`", "ratio": "5.53:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Subtle ink — large text / UI only", "tokens": "`--ink-subtle` on `--bg`", "ratio": "3.51:1", "target": "3.0:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Ink on sunken surface", "tokens": "`--ink` on `--surface-sunken`", "ratio": "17.06:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Ink on accent tint surface", "tokens": "`--ink` on `--surface-accent`", "ratio": "10.70:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Muted ink on sunken surface", "tokens": "`--ink-muted` on `--surface-sunken`", "ratio": "7.44:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Button label on brand fill", "tokens": "`--on-brand` on `--brand`", "ratio": "5.65:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Button label on brand hover fill", "tokens": "`--on-brand` on `--brand-hover`", "ratio": "7.09:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Label on accent fill", "tokens": "`--on-accent` on `--accent`", "ratio": "7.51:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Brand link text on background", "tokens": "`--brand-text` on `--bg`", "ratio": "7.09:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Brand link hover on background", "tokens": "`--brand-text-hover` on `--bg`", "ratio": "8.83:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Brand link on sunken surface", "tokens": "`--brand-text` on `--surface-sunken`", "ratio": "9.55:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Focus ring against background", "tokens": "`--focus` on `--bg`", "ratio": "7.09:1", "target": "3.0:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Hairline border visibility", "tokens": "`--border-strong` on `--bg`", "ratio": "2.26:1", "target": "1.2:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Success text", "tokens": "`--success` on `--bg`", "ratio": "6.92:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Warning text", "tokens": "`--warning` on `--bg`", "ratio": "9.28:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Danger text", "tokens": "`--danger` on `--bg`", "ratio": "7.45:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Inverse ink on inverse surface", "tokens": "`--ink-inverse` on `--surface-inverse`", "ratio": "12.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Ink on raised forest surface", "tokens": "`--ink` on `--surface-raised`", "ratio": "10.70:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Muted ink on raised forest surface", "tokens": "`--ink-muted` on `--surface-raised`", "ratio": "4.67:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Brand link on raised forest surface", "tokens": "`--brand-text` on `--surface-raised`", "ratio": "5.99:1", "target": "4.5:1", "pass": "PASS"}, {"ctx": "Forest dark", "desc": "Brand fill against forest canvas", "tokens": "`--brand` on `--surface`", "ratio": "5.65:1", "target": "3.0:1", "pass": "PASS"}];
+document.getElementById('contrast-rows').innerHTML = contrast.map(r => `
+  <tr>
+    <td>${r.ctx}</td>
+    <td>${r.desc}</td>
+    <td class="mono">${r.tokens.replace(/`/g, '')}</td>
+    <td class="num">${r.ratio}</td>
+    <td class="num">${r.target}</td>
+    <td><span class="verdict">${r.pass}</span></td>
+  </tr>`).join('');
+document.getElementById('contrast-summary').textContent =
+  `${contrast.length} pairs checked · ${contrast.filter(r => r.pass !== 'PASS').length} failing`;
+</script>
