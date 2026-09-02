@@ -12,15 +12,19 @@ requirement.
 
 **Deep forest `#1c3830` is the darkest shade of the brand green `#86bd42`.** The
 two colours Avocadots already owned turned out to be the two ends of one ramp, so
-the palette narrows to one brand ramp, one neutral ramp and one warm accent —
-without giving up any brand equity.
+the palette narrows to one brand ramp plus one neutral ramp — without giving up
+any brand equity. **Gold is the second brand colour**, not a minor accent: on the
+live site it carries the primary CTA, the nav CTA, whole section backgrounds and a
+highlighter on running copy.
 
 **The brand green has two roles, not one.** As a *fill* it stays exactly as it is.
 As *text* it moves to `green-700`. Conflating the two is what put the conversion
 path below half the required contrast, and separating them fixes it site-wide.
 
-All 40 colour pairings the system ships are verified by script, in both the light
-and forest-dark contexts.
+All 51 colour pairings the system ships are verified by script, across the light,
+forest-dark and gold contexts. Gold is the restrictive one — white, muted ink and
+the green link colour all fail on it, so on a gold surface nearly everything
+resolves to forest.
 
 ## Where to start
 
@@ -81,7 +85,7 @@ If you are writing a hex value anywhere outside `tokens/`, stop.
 ## Commands
 
 ```bash
-node design-system/verify-contrast.mjs        # verify every shipped colour pair
+node design-system/verify-contrast.mjs        # verify all 51 shipped colour pairs
 node design-system/verify-contrast.mjs --md   # regenerate the accessibility table
 node design-system/build-wix-css.mjs          # rebuild the Wix paste block
 ```

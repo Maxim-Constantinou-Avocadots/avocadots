@@ -569,8 +569,13 @@ footer.foot p { font-size:var(--text-sm); }
         <div class="callout">
           <p><b>The green was never the problem.</b> The problem was that one
           colour was doing two jobs. As a <i>fill</i> it is excellent. As
-          <i>text</i> it is illegible. Splitting those roles fixes the contrast
-          failure across all 180+ pages without altering the brand.</p>
+          <i>text</i> it is illegible. Splitting those roles removes the trap
+          across all 180+ pages without altering the brand.</p>
+          <p><b>Scope note.</b> These are measurements of the colour pairing, which
+          nothing in the site's styling prevented. An earlier version of this page
+          also claimed the failure sat on specific live buttons — that was inferred
+          rather than verified, and is withdrawn. The primary CTA on
+          <code>/web-design</code> is gold with forest text: 7.51:1, passing.</p>
         </div>
       </div>
     </section>
@@ -587,7 +592,7 @@ footer.foot p { font-size:var(--text-sm); }
           <table>
             <thead><tr><th>#</th><th>Finding</th><th>Evidence</th></tr></thead>
             <tbody>
-              <tr><td class="num">1</td><td class="mono">Primary CTA fails accessibility</td><td>Green on white and white on green both measure 2.24:1</td></tr>
+              <tr><td class="num">1</td><td class="mono">The brand green is a contrast trap</td><td>Green on white and white on green both measure 2.24:1. Scope corrected: the live CTA is gold with forest text, 7.51:1 — passing.</td></tr>
               <tr><td class="num">2</td><td class="mono">Palette sprawl</td><td>Five accents, four ad-hoc greys, plus Wix's stock blue <code>#116dff</code></td></tr>
               <tr><td class="num">3</td><td class="mono">No radius discipline</td><td>Seven values: 4, 6, 8, 16, 40, 300px, 50%</td></tr>
               <tr><td class="num">4</td><td class="mono">No elevation system</td><td><code>box-shadow</code> is <code>none</code> almost everywhere</td></tr>
@@ -625,10 +630,22 @@ footer.foot p { font-size:var(--text-sm); }
           <code>green-300</code> holds 7.09:1.</p>
         </div>
 
-        <h3>Gold — the single warm accent</h3>
-        <p>Awards, badges, one highlighted statistic. Not a second brand colour.
-        <code>gold-500</code> is a fill only; for gold text use <code>gold-700</code>
-        or darker.</p>
+        <h3>Gold — the second brand colour</h3>
+        <p><b>Corrected.</b> This originally read “the single warm accent… not a
+        second brand colour”. That was wrong about this brand. On
+        <code>/web-design</code> gold carries the primary CTA, the nav CTA, an
+        entire section background, and a highlighter on running copy — four
+        structural roles. Green is the identity; gold is what asks for the click.</p>
+        <div class="callout">
+          <p><b>Gold is unusually restrictive.</b> On <code>#eac435</code>: forest is
+          7.51:1 and works; <code>green-800</code> is 5.68:1 and works; but
+          <code>--ink-muted</code> is only 3.31:1, <code>--brand-text</code> is
+          4.04:1, <code>green-400</code> is 1.33:1, and white is 1.69:1 — all fail.
+          On a gold surface nearly everything resolves to forest, and hierarchy
+          comes from size and weight rather than a lighter ink. The
+          <code>.on-gold</code> context encodes this, including inverting the CTA
+          to a forest fill.</p>
+        </div>
         <div class="ramp" id="ramp-gold"></div>
 
         <h3>Neutrals</h3>
@@ -804,6 +821,13 @@ footer.foot p { font-size:var(--text-sm); }
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="callout">
+          <p><b>Gold is the primary CTA on this brand.</b> <code>--cta</code> is
+          <code>gold-500</code> with a forest label (7.51:1); the green fill is the
+          secondary. On a gold section the CTA inverts to a forest fill with white
+          text (12.67:1) — a gold button on a gold band is meaningless.</p>
         </div>
 
         <div class="table-scroll">

@@ -41,6 +41,7 @@ const declsIn = (text) => {
 
 const light = declsIn(blockOf(':root'));
 const dark = { ...light, ...declsIn(blockOf('.on-dark')) };
+const gold = { ...light, ...declsIn(blockOf('.on-gold')) };
 
 /** Resolve a token to a hex/rgba string, following var() aliases. */
 const resolve = (name, scope, seen = new Set()) => {
@@ -104,6 +105,19 @@ const PAIRS = [
   ['--warning',           '--bg',              4.5, 'Warning text'],
   ['--danger',            '--bg',              4.5, 'Danger text'],
   ['--ink-inverse',       '--surface-inverse', 4.5, 'Inverse ink on inverse surface'],
+  ['--on-cta',            '--cta',             4.5, 'Label on the primary CTA'],
+  ['--on-cta',            '--cta-hover',       4.5, 'Label on the CTA hover fill'],
+  ['--on-highlight',      '--highlight',       4.5, 'Text under the highlighter'],
+];
+
+// The gold canvas is unusually restrictive — white, muted ink and the green
+// link colour all fail on it. These pairs exist so that stays enforced.
+const GOLD_ONLY = [
+  ['--ink',        '--surface-gold', 4.5, 'Ink on a full gold section'],
+  ['--ink-muted',  '--surface-gold', 4.5, 'Muted ink on gold'],
+  ['--brand-text', '--surface-gold', 4.5, 'Link text on gold'],
+  ['--ink',        '--surface-sunken', 4.5, 'Ink on the gold sunken tone'],
+  ['--on-cta',     '--cta',          4.5, 'CTA label on gold canvas (inverts to forest)'],
 ];
 
 const DARK_ONLY = [
@@ -120,6 +134,7 @@ let failures = 0;
 for (const [label, scope, list] of [
   ['Light', light, PAIRS],
   ['Forest dark', dark, [...PAIRS, ...DARK_ONLY]],
+  ['Gold', gold, GOLD_ONLY],
 ]) {
   for (const [fg, bg, target, desc] of list) {
     const r = ratio(resolve(fg, scope), resolve(bg, scope));

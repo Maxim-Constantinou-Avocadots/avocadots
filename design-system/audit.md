@@ -33,9 +33,10 @@ down gets re-decided 180 times.
 
 ---
 
-## Finding 1 — The primary call-to-action fails accessibility
+## Finding 1 — The brand green is a contrast trap
 
-This is the most consequential finding.
+The most consequential finding, though narrower than first stated — see the scope
+correction below.
 
 | Pair | Measured | WCAG AA | |
 | --- | --: | --: | --- |
@@ -46,12 +47,21 @@ This is the most consequential finding.
 
 Both of the ways the brand green is most likely to be used — as green text on a
 white page, and as a white label on a green button — sit at less than half the
-required contrast. This affects the "Work with us" and "Start Now" buttons, i.e.
-the conversion path.
+required contrast.
 
-The green itself is not the problem and does not need to change. What was missing
-was a rule separating the colour's *fill* role from its *text* role. The system
-supplies one: see `foundations/color.md`.
+**Scope correction.** An earlier version of this finding went on to say the failure
+"affects the 'Work with us' and 'Start Now' buttons, i.e. the conversion path".
+That was inferred from the palette, not verified against a rendered page, and it
+was overstated. Screenshots of `/web-design` since show the primary CTA is **gold
+with forest text — 7.51:1, passing**.
+
+What stands is the measurement itself: `#86bd42` is a trap in both directions, and
+nothing in the site's styling prevented it being used either way. What is
+withdrawn is the claim about which specific live buttons were broken.
+
+The green does not need to change. What was missing was a rule separating the
+colour's *fill* role from its *text* role. The system supplies one: see
+`foundations/color.md`.
 
 ## Finding 2 — Palette sprawl
 
@@ -123,8 +133,8 @@ at 64px with default tracking is the most visible symptom.
 
 | Finding | Response |
 | --- | --- |
-| 1. CTA contrast failure | Split fill and text roles; forest labels on green fills. All 40 shipped pairs verified AA. |
-| 2. Palette sprawl | One green ramp + one neutral ramp + one warm accent; three colours retired. |
+| 1. Green contrast trap | Split fill and text roles; forest labels on green fills. All 51 shipped pairs verified AA. |
+| 2. Palette sprawl | One green ramp, one neutral ramp, and gold as the second brand colour; navy, red and the Wix blue retired. |
 | 3. Radius sprawl | Seven values reduced to four, each with a stated use. |
 | 4. No elevation | Four forest-tinted levels, plus a border-first rule. |
 | 5. Content debt | A case-study template with mandatory outcomes, and a fixed tag taxonomy. |

@@ -56,14 +56,47 @@ hover   green-300  #a8ce76   forest label   7.09:1
 active  green-200  #c7e0a6   forest label   8.83:1
 ```
 
-## The warm accent
+## Gold — the second brand colour
 
-Gold is the single warm accent — awards, badges, a highlighted statistic, the
-occasional underline. It is not a second brand colour and should never appear
-more than once or twice per screen.
+**Corrected.** An earlier version of this document called gold "the single warm
+accent", to be used "sparingly" and "never more than once or twice per screen".
+That was wrong about this brand. On `/web-design` — the page the studio holds up
+as the reference — gold carries four structural roles:
 
-`gold-500 #eac435` is a **fill only** (1.69:1 as text on white). For gold *text*,
-use `gold-700 #8d710b` or darker.
+- the **primary CTA** fill ("Get Your Custom Quote"), with forest text
+- the **nav CTA** fill ("Contact Us")
+- an **entire full-bleed section** background
+- a **highlighter** behind key phrases in running copy
+
+So gold is a co-equal brand colour, and the system now says so. Green remains the
+identity; gold is what asks for the click.
+
+```
+--cta: gold-500   --on-cta: green-900   (7.51:1)
+--highlight: gold-300   --on-highlight: green-900   (9.28:1)
+--surface-gold: gold-500
+```
+
+### Gold is unusually restrictive
+
+It is a light, highly saturated colour, so most things fail on it. Verified:
+
+| On gold `#eac435` | Ratio | |
+| --- | --: | --- |
+| Forest `green-900` | 7.51 | **use this** |
+| `green-800` (muted role) | 5.68 | ok |
+| `--ink-muted` (`neutral-600`) | 3.31 | **fails** |
+| `--brand-text` (`green-700`) | 4.04 | **fails** |
+| `green-400` | 1.33 | **fails badly** |
+| White | 1.69 | **never** |
+
+In practice: **on a gold surface, nearly everything is forest.** Hierarchy comes
+from size and weight, not from a lighter ink. The `.on-gold` context in
+`tokens.css` encodes this, including inverting the CTA to a forest fill — a gold
+button on a gold section is meaningless.
+
+`gold-500` remains a fill. For gold *text* on white, use `gold-700 #8d710b` or
+darker.
 
 ## Neutrals
 

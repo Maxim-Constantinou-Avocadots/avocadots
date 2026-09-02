@@ -26,18 +26,51 @@ This page has no stock imagery anywhere, by design.
 
 ## Section order
 
+Revised to follow `/web-design`, the page the studio holds up as the reference.
+The first version of this page ran white → tint → **forest dark, twice**. The
+reference never goes dark — it goes *brighter*: green gradient → light → full
+gold. The dark rhythm made the About page read as a different site.
+
 | # | Section | Canvas | Job |
 | --: | --- | --- | --- |
-| 1 | Hero + credential bar | White | Mission line, then proof in the first screenful |
-| 2 | Origin + dated arc | Tint (`--surface-sunken`) | Where this came from, in their own words |
-| 3 | **The engine** | Forest (`.on-dark`) | Draw the one idea they repeat everywhere |
+| 1 | Hero + credential chips | **Green gradient + grid** | Mission line, then proof in the first screenful |
+| 2 | Origin + dated arc | Light grey | Where this came from, in their own words |
+| 3 | **The engine** | **Full gold** | Draw the one idea they repeat everywhere |
 | 4 | Values | White | Five real values, one claim each |
-| 5 | The nine | Forest (`.on-dark`) | The human half of the mission |
-| 6 | Platforms | Tint | Certifications as capability, not badges |
-| 7 | Close + contact | Forest | Named-human CTA, then the details |
+| 5 | The nine | Light grey | The human half of the mission |
+| 6 | Platforms | White | Certifications as capability, not badges |
+| 7 | Close + contact | **Green gradient** | Named-human CTA, then the details |
 
-Two forest sections plus the closing band is the ceiling set in
-`foundations/layout.md` — spend the dark canvas twice, not five times.
+## Matching the reference
+
+| Reference device | How it is built here |
+| --- | --- |
+| Green→white gradient hero | `linear-gradient` through four stops, all verified against forest ink |
+| Graph-paper grid | Two `linear-gradient`s at 96px, masked so it fades out — no image asset |
+| Floating frosted pill nav | `border-radius: var(--radius-pill)` + `backdrop-filter: blur(14px)` |
+| Gold primary CTA | `--cta` / `--on-cta`, forest label |
+| White proof chips on colour | `.chip` — white fill, hairline border, ✓ glyph |
+| Full gold section | `.on-gold` context class |
+| Radial line pattern | `repeating-conic-gradient` |
+| Yellow highlighter | `.mark`, using `--highlight` / `--on-highlight` |
+
+## What gold forced
+
+Gold is far more restrictive than it looks, and this was verified rather than
+assumed. On `#eac435`, forest is 7.51:1 and `green-800` is 5.68:1 — but
+`--ink-muted` is **3.31:1**, `--brand-text` is **4.04:1**, `green-400` is
+**1.33:1**, and white is **1.69:1**. All fail.
+
+So the engine diagram **could not simply be inverted** off the forest canvas: its
+bright `green-400` strokes were unreadable on gold. Every stroke and label is now
+forest or `green-800`, which turns the diagram into something closer to a
+blueprint — and suits the gold band better than the original did.
+
+The same constraint applies to the closing gradient: the contact labels were
+drafted in `green-800` and measured **4.28:1** against the deep green end, so they
+are full forest, with hierarchy from size and letter-spacing instead of a lighter
+ink. An `opacity` softening was tried and made it worse (3.35:1) — on saturated
+grounds, opacity is not a substitute for a verified colour.
 
 ## The engine diagram
 
@@ -79,7 +112,8 @@ nothing invented:
 | Katerina | Multimedia Designer | An architect by training. Makes the video and graphics. |
 
 **Portraits.** The monogram tiles are placeholders, tinted across
-`green-200/300/400` so the grid reads as a graded set. They exist so the page is
+`green-200/300/400` and `gold-300/500` so the grid reads as a graded set in both
+brand colours. Every tint carries a forest letter and clears AA (5.65 to 9.28). They exist so the page is
 complete without faking photography. Replace them with **real portraits, shot
 consistently** — same lens, same light, same background, same crop. Nine portraits
 shot the same way is itself a design statement; nine shot differently is a
@@ -147,10 +181,11 @@ Verified against `design-system/accessibility.md`:
 
 - **One `<h1>`.** The mission line. (The current `/web-design` page has 18 — do not
   copy that pattern here.)
-- Every colour pair passes AA. The first draft of this page used `--ink-subtle`
-  for four pieces of small text — the team card roles measured **2.96:1** — and all
-  four were moved to `--ink-muted`. That token is 3.61:1 and is reserved for large
-  text and non-text UI; it is not a body-copy colour.
+- Every colour pair passes AA, across three canvases now — light, forest and gold
+  (51 pairs in `verify-contrast.mjs`). Two rounds of real failures were caught by
+  the script rather than by eye: four pieces of small text set in `--ink-subtle`
+  (team card roles at **2.96:1**), and the closing contact labels at **4.28:1** on
+  the green gradient.
 - The monogram tiles are `aria-hidden` — the name follows in real text.
 - The SVG carries an `aria-label` describing what it shows.
 - Contact details are a `<dl>`, with real `tel:` and `mailto:` links.

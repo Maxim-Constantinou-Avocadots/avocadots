@@ -30,8 +30,10 @@
   /* Raised surface for use on the forest-dark canvas. */
   --green-850: #24443a;
 
-  /* Gold — the single warm accent. Used sparingly: awards, badges,
-     highlights. gold-500 is a fill; only gold-700+ is legible as text. */
+  /* Gold — the second brand colour. On avocadots.com it carries the primary
+     CTA, the nav CTA, whole section backgrounds and a highlighter on running
+     copy. It is not a minor accent.
+     gold-500 is a FILL. Only gold-700+ is legible as text on white. */
   --gold-100: #fdf3d4;
   --gold-300: #f4dc7e;
   --gold-500: #eac435;
@@ -206,6 +208,17 @@
   --accent:    var(--gold-500);
   --on-accent: var(--green-900);          /* 7.51:1 on --accent */
 
+  /* Call to action. Gold is the primary CTA on this brand; the green fill
+     is the secondary. Labels on gold are forest — white on gold is 1.69:1. */
+  --cta:       var(--gold-500);
+  --cta-hover: var(--gold-300);
+  --on-cta:    var(--green-900);          /* 7.51:1 on --cta */
+
+  /* Gold as a surface, and as a highlighter behind running copy. */
+  --surface-gold:  var(--gold-500);
+  --highlight:     var(--gold-300);
+  --on-highlight:  var(--green-900);      /* 9.28:1 */
+
   --focus:       var(--green-600);
   --focus-width: 3px;
   --focus-offset:2px;
@@ -248,6 +261,13 @@
   --accent:    var(--gold-500);
   --on-accent: var(--green-900);
 
+  --cta:       var(--gold-500);
+  --cta-hover: var(--gold-300);
+  --on-cta:    var(--green-900);
+  --surface-gold: var(--gold-500);
+  --highlight:    var(--gold-300);
+  --on-highlight: var(--green-900);
+
   --focus: var(--green-300);
 
   --success: var(--status-success-bright);
@@ -260,6 +280,55 @@
   --elevation-2: none;
   --elevation-3: 0 12px 28px rgba(0, 0, 0, 0.35);
   --elevation-4: 0 24px 56px rgba(0, 0, 0, 0.45);
+}
+
+/* --------------------------------------------------------------------
+   Gold canvas.
+   For a full-bleed gold section. Gold is unusually restrictive: white,
+   muted ink and the green link colour all fail on it, so almost
+   everything resolves to forest. Verified rather than assumed.
+   -------------------------------------------------------------------- */
+.on-gold,
+[data-surface="gold"] {
+  --bg:             var(--gold-500);
+  --surface:        var(--gold-500);
+  --surface-sunken: var(--gold-300);
+  --surface-raised: var(--neutral-0);
+  --surface-accent: var(--gold-300);
+
+  --ink:        var(--green-900);   /* 7.51:1 on gold */
+  --ink-muted:  var(--green-800);   /* 5.68:1 — neutral-600 is only 3.31 */
+  --ink-subtle: var(--green-800);   /* no lighter tone clears AA on gold */
+
+  --border:        rgba(28, 56, 48, 0.22);
+  --border-strong: rgba(28, 56, 48, 0.42);
+
+  /* No green text on gold: brand-text is 4.04:1 and green-400 is 1.33:1. */
+  --brand-text:       var(--green-900);
+  --brand-text-hover: var(--green-800);
+
+  /* On gold the CTA inverts to forest, since gold-on-gold is meaningless. */
+  --cta:       var(--green-900);
+  --cta-hover: var(--green-800);
+  --on-cta:    var(--neutral-0);    /* 12.67:1 */
+
+  --brand:    var(--green-900);
+  --on-brand: var(--neutral-0);
+
+  --focus: var(--green-900);
+
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Highlighter on running copy — the device used on /web-design. */
+.mark {
+  background: var(--highlight);
+  color: var(--on-highlight);
+  padding: 0.05em 0.22em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* Honour the user's motion preference everywhere. */

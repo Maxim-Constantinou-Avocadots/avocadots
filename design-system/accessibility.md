@@ -41,6 +41,9 @@ to `PAIRS` in the script — a token that is not in the table is not verified.
 | Light | Warning text | `--warning` on `--bg` | 4.67:1 | 4.5:1 | PASS |
 | Light | Danger text | `--danger` on `--bg` | 6.54:1 | 4.5:1 | PASS |
 | Light | Inverse ink on inverse surface | `--ink-inverse` on `--surface-inverse` | 12.67:1 | 4.5:1 | PASS |
+| Light | Label on the primary CTA | `--on-cta` on `--cta` | 7.51:1 | 4.5:1 | PASS |
+| Light | Label on the CTA hover fill | `--on-cta` on `--cta-hover` | 9.28:1 | 4.5:1 | PASS |
+| Light | Text under the highlighter | `--on-highlight` on `--highlight` | 9.28:1 | 4.5:1 | PASS |
 | Forest dark | Body ink on page background | `--ink` on `--bg` | 12.67:1 | 4.5:1 | PASS |
 | Forest dark | Muted ink on page background | `--ink-muted` on `--bg` | 5.53:1 | 4.5:1 | PASS |
 | Forest dark | Subtle ink — large text / UI only | `--ink-subtle` on `--bg` | 3.51:1 | 3.0:1 | PASS |
@@ -59,10 +62,18 @@ to `PAIRS` in the script — a token that is not in the table is not verified.
 | Forest dark | Warning text | `--warning` on `--bg` | 9.28:1 | 4.5:1 | PASS |
 | Forest dark | Danger text | `--danger` on `--bg` | 7.45:1 | 4.5:1 | PASS |
 | Forest dark | Inverse ink on inverse surface | `--ink-inverse` on `--surface-inverse` | 12.67:1 | 4.5:1 | PASS |
+| Forest dark | Label on the primary CTA | `--on-cta` on `--cta` | 7.51:1 | 4.5:1 | PASS |
+| Forest dark | Label on the CTA hover fill | `--on-cta` on `--cta-hover` | 9.28:1 | 4.5:1 | PASS |
+| Forest dark | Text under the highlighter | `--on-highlight` on `--highlight` | 9.28:1 | 4.5:1 | PASS |
 | Forest dark | Ink on raised forest surface | `--ink` on `--surface-raised` | 10.70:1 | 4.5:1 | PASS |
 | Forest dark | Muted ink on raised forest surface | `--ink-muted` on `--surface-raised` | 4.67:1 | 4.5:1 | PASS |
 | Forest dark | Brand link on raised forest surface | `--brand-text` on `--surface-raised` | 5.99:1 | 4.5:1 | PASS |
 | Forest dark | Brand fill against forest canvas | `--brand` on `--surface` | 5.65:1 | 3.0:1 | PASS |
+| Gold | Ink on a full gold section | `--ink` on `--surface-gold` | 7.51:1 | 4.5:1 | PASS |
+| Gold | Muted ink on gold | `--ink-muted` on `--surface-gold` | 5.68:1 | 4.5:1 | PASS |
+| Gold | Link text on gold | `--brand-text` on `--surface-gold` | 7.51:1 | 4.5:1 | PASS |
+| Gold | Ink on the gold sunken tone | `--ink` on `--surface-sunken` | 9.28:1 | 4.5:1 | PASS |
+| Gold | CTA label on gold canvas (inverts to forest) | `--on-cta` on `--cta` | 12.67:1 | 4.5:1 | PASS |
 <!-- END GENERATED CONTRAST TABLE -->
 
 ### Two rules that come out of this data
