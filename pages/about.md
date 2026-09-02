@@ -1,5 +1,11 @@
 # About page — build spec
 
+> **High-fidelity mockup.** This page is a developer hand-off, not a wireframe.
+> It embeds six of Avocadots' own client projects as WebP data URIs (~1.6 MB) so
+> it renders standalone with no network. In a real build those become normal
+> `<img>` tags served from the Wix CDN, which already delivers AVIF at responsive
+> widths — see *Imagery* below.
+
 Live reference: `pages/about.html` (published as an Artifact).
 Replaces: `/about-avocadots-design-studio`.
 
@@ -19,6 +25,53 @@ Its content architecture is stronger than the earlier version in three ways:
   useful than monogram tiles alone.
 - **A complete page**: a named process, a story timeline, values, services and an
   FAQ, rather than a statement.
+
+## The art direction
+
+The earlier version read as a wireframe, and the reason was structural: nearly
+every section was the same white card with a hairline border, sitting in a neat
+grid, with no imagery anywhere. Flat vector, no depth, no faces, no work.
+
+Four changes fixed it:
+
+**Proportion, not new colour.** No hues were added — the system stands. What
+changed is how much of it is spent: **forest `#1c3830` becomes a dominant ground**
+for the story chapters (client strip, selected work, the engine, the quote) rather
+than a rare accent, with bright relief bands between. The page now has chapters
+instead of a uniform scroll.
+
+**Their own work, at scale.** The hero opens on a fanned deck of six real client
+projects — Aviair, Vima Art Fair, PPSB, Gizet, Rum & Jam, Agora — and a dedicated
+*Selected work* chapter shows five of them large on near-black. For an agency
+About page, the work is the most characteristic thing in the room; the previous
+version had none of it.
+
+**Scale contrast.** Display type runs to 7rem against 12px labels tracked at
+`.16em`. Statistics are oversized tabular numerals sitting directly on the ground,
+separated by hairlines — not four identical boxes.
+
+**Texture and depth.** A fine SVG grain overlays every colour field, cards carry
+real two-layer shadows, and the deck rotates and lifts on hover. Grain is the
+single biggest tell between flat vector and a printed surface.
+
+**Not everything is a card.** `components/cards.md` says this and the earlier
+version broke it wholesale. Now: stats are hairline-separated, values are
+rule-topped columns, services are colour-blocked tiles, the timeline is a
+connected line, and only the team and the trio are actual cards.
+
+## Imagery
+
+Six projects are embedded as WebP data URIs, pulled from Avocadots' own Wix CDN at
+`q_52` and 720–880px. This keeps the mockup self-contained.
+
+**For the build, do not embed them.** Wix already serves these assets as AVIF at
+responsive widths with `enc_avif, quality_auto` — that delivery is correctly
+configured and should be used as-is. Replace each `data-img` attribute with a
+normal `src` and `srcset`.
+
+Team portraits remain monogram plates on the category tones, with a grain overlay
+and a gradient. They are placeholders for **nine portraits shot the same way** —
+same lens, light, background, crop.
 
 ## What changed
 
