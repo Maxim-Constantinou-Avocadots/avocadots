@@ -85,6 +85,12 @@ identical "Learn more"s.
 
 **Never "Add".** It isn't a call to action; it's a leftover default.
 
+**"Start Now" is on probation.** It appears **ten times** on `/digital-marketing`
+alone. It names no destination and no commitment level. Prefer "Start a project"
+for the conversion action, or a named-human booking — "Book a call with Andreas"
+— which outperforms "Book a Free Digital Marketing Consultation" on both length
+and warmth. See `service-page-pattern.md`.
+
 ## Headline patterns that work here
 
 | Pattern | Example |

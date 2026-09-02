@@ -32,6 +32,7 @@ and forest-dark contexts.
 | Set some type | [`design-system/foundations/typography.md`](design-system/foundations/typography.md) |
 | Build a component | [`design-system/components/`](design-system/components/) |
 | Write a case study | [`design-system/content/case-study-template.md`](design-system/content/case-study-template.md) |
+| Write or fix a service page | [`design-system/content/service-page-pattern.md`](design-system/content/service-page-pattern.md) |
 | Check accessibility | [`design-system/accessibility.md`](design-system/accessibility.md) |
 
 ## Layout
@@ -53,7 +54,8 @@ design-system/
   foundations/              colour · typography · space/radius/elevation · motion · layout
   components/               button · cards · tag-badge · data-display ·
                             navigation · forms · disclosure · cta-band
-  content/                  case-study template · tag taxonomy · voice and CTAs
+  content/                  case-study template · service-page pattern ·
+                            tag taxonomy · voice and CTAs
 
 styleguide/
   index.html                The living style guide
