@@ -44,6 +44,22 @@ to `PAIRS` in the script — a token that is not in the table is not verified.
 | Light | Label on the primary CTA | `--on-cta` on `--cta` | 7.51:1 | 4.5:1 | PASS |
 | Light | Label on the CTA hover fill | `--on-cta` on `--cta-hover` | 9.28:1 | 4.5:1 | PASS |
 | Light | Text under the highlighter | `--on-highlight` on `--highlight` | 9.28:1 | 4.5:1 | PASS |
+| Light | White label on forest | `--on-cat` on `--cat-forest` | 12.67:1 | 4.5:1 | PASS |
+| Light | Forest label on forest tint | `--on-cat-tint` on `--cat-forest-tint` | 9.72:1 | 4.5:1 | PASS |
+| Light | White label on moss | `--on-cat` on `--cat-moss` | 6.81:1 | 4.5:1 | PASS |
+| Light | Forest label on moss tint | `--on-cat-tint` on `--cat-moss-tint` | 10.55:1 | 4.5:1 | PASS |
+| Light | White label on teal | `--on-cat` on `--cat-teal` | 6.90:1 | 4.5:1 | PASS |
+| Light | Forest label on teal tint | `--on-cat-tint` on `--cat-teal-tint` | 10.14:1 | 4.5:1 | PASS |
+| Light | White label on ocean | `--on-cat` on `--cat-ocean` | 7.03:1 | 4.5:1 | PASS |
+| Light | Forest label on ocean tint | `--on-cat-tint` on `--cat-ocean-tint` | 10.19:1 | 4.5:1 | PASS |
+| Light | White label on violet | `--on-cat` on `--cat-violet` | 8.34:1 | 4.5:1 | PASS |
+| Light | Forest label on violet tint | `--on-cat-tint` on `--cat-violet-tint` | 9.85:1 | 4.5:1 | PASS |
+| Light | White label on berry | `--on-cat` on `--cat-berry` | 7.61:1 | 4.5:1 | PASS |
+| Light | Forest label on berry tint | `--on-cat-tint` on `--cat-berry-tint` | 9.92:1 | 4.5:1 | PASS |
+| Light | White label on clay | `--on-cat` on `--cat-clay` | 6.27:1 | 4.5:1 | PASS |
+| Light | Forest label on clay tint | `--on-cat-tint` on `--cat-clay-tint` | 10.00:1 | 4.5:1 | PASS |
+| Light | White label on olive | `--on-cat` on `--cat-olive` | 5.93:1 | 4.5:1 | PASS |
+| Light | Forest label on olive tint | `--on-cat-tint` on `--cat-olive-tint` | 11.43:1 | 4.5:1 | PASS |
 | Forest dark | Body ink on page background | `--ink` on `--bg` | 12.67:1 | 4.5:1 | PASS |
 | Forest dark | Muted ink on page background | `--ink-muted` on `--bg` | 5.53:1 | 4.5:1 | PASS |
 | Forest dark | Subtle ink — large text / UI only | `--ink-subtle` on `--bg` | 3.51:1 | 3.0:1 | PASS |

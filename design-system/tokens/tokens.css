@@ -55,6 +55,28 @@
   --neutral-800: #303833;
   --neutral-900: #1a1f1c;
 
+  /* ---------------------------------------------------------------- */
+  /* Category palette — identity, never state.                         */
+  /* For team avatars, service markers and tag identity: things that    */
+  /* need to be told apart at a glance. Eight tones at consistent       */
+  /* chroma; forest and moss are the brand's own, so the family is      */
+  /* anchored rather than bolted on.                                    */
+  /* NEVER use these for UI state — that is what --success /            */
+  /* --warning / --danger are for.                                      */
+  /* Each deep tone carries a white label; each tint carries forest.    */
+  /* ---------------------------------------------------------------- */
+  --cat-forest: #1c3830;  --cat-forest-tint: #d9e4df;
+  --cat-moss:   #436421;  --cat-moss-tint:   #e2efd0;
+  --cat-teal:   #12655c;  --cat-teal-tint:   #d3ebe7;
+  --cat-ocean:  #1d5b96;  --cat-ocean-tint:  #dbe8f6;
+  --cat-violet: #57408c;  --cat-violet-tint: #e6e0f4;
+  --cat-berry:  #932d59;  --cat-berry-tint:  #f7dde7;
+  --cat-clay:   #a04425;  --cat-clay-tint:   #fadfd4;
+  --cat-olive:  #7a6109;  --cat-olive-tint:  #fdf3d4;
+
+  --on-cat:      var(--neutral-0);   /* 5.93–12.67:1 on every deep tone */
+  --on-cat-tint: var(--green-900);   /* 9.72–11.43:1 on every tint      */
+
   /* Status. Each verified to WCAG AA as text on white. */
   --status-success: #0e7a4a;
   --status-warning: #8d710b;

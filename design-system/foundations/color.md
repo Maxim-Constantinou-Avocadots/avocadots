@@ -98,6 +98,42 @@ button on a gold section is meaningless.
 `gold-500` remains a fill. For gold *text* on white, use `gold-700 #8d710b` or
 darker.
 
+## The category palette
+
+Separate from the brand palette, and doing a different job: telling things
+**apart**. Team avatars, service markers, tag identity — cases where a reader needs
+to distinguish eight things at a glance, and the brand ramp alone cannot.
+
+Eight tones at consistent chroma. **Forest and moss are the brand's own colours**,
+so the family is anchored on the brand rather than bolted on beside it.
+
+| | Deep — white label | Tint — forest label |
+| --- | --- | --- |
+| Forest | `#1c3830` 12.67 | `#d9e4df` 9.72 |
+| Moss | `#436421` 6.81 | `#e2efd0` 10.55 |
+| Teal | `#12655c` 6.90 | `#d3ebe7` 10.14 |
+| Ocean | `#1d5b96` 7.03 | `#dbe8f6` 10.19 |
+| Violet | `#57408c` 8.34 | `#e6e0f4` 9.85 |
+| Berry | `#932d59` 7.61 | `#f7dde7` 9.92 |
+| Clay | `#a04425` 6.27 | `#fadfd4` 10.00 |
+| Olive | `#7a6109` 5.93 | `#fdf3d4` 11.43 |
+
+Use `--on-cat` (white) on any deep tone and `--on-cat-tint` (forest) on any tint —
+both are verified against all eight, so you can pair them without checking.
+
+### Rules
+
+- **Identity, never state.** A category colour says *which one*, never *how it is
+  going* — that is `--success` / `--warning` / `--danger`. A red avatar must never
+  imply a problem.
+- **Assign deliberately and keep it.** Once a person or service owns a tone, it is
+  theirs across the site. A palette that reshuffles is decoration, not a system.
+- **Never as a large surface.** These are marks: avatars, dots, pills. A full
+  section in category berry is not a thing.
+- **The label colour is fixed.** White on deep, forest on tint. Do not improvise —
+  the ad-hoc version of this palette on an earlier draft had white labels at
+  2.26:1.
+
 ## Neutrals
 
 One ramp, `neutral-0` through `neutral-900`, carrying a faint green undertone so

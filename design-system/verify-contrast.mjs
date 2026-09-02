@@ -110,6 +110,14 @@ const PAIRS = [
   ['--on-highlight',      '--highlight',       4.5, 'Text under the highlighter'],
 ];
 
+// Category palette — identity colours for team, service and tag markers.
+// Each deep tone must carry a white label; each tint a forest one.
+const CATEGORY = ['forest','moss','teal','ocean','violet','berry','clay','olive']
+  .flatMap((name) => [
+    ['--on-cat',      `--cat-${name}`,        4.5, `White label on ${name}`],
+    ['--on-cat-tint', `--cat-${name}-tint`,   4.5, `Forest label on ${name} tint`],
+  ]);
+
 // The gold canvas is unusually restrictive — white, muted ink and the green
 // link colour all fail on it. These pairs exist so that stays enforced.
 const GOLD_ONLY = [
@@ -132,7 +140,7 @@ const rows = [];
 let failures = 0;
 
 for (const [label, scope, list] of [
-  ['Light', light, PAIRS],
+  ['Light', light, [...PAIRS, ...CATEGORY]],
   ['Forest dark', dark, [...PAIRS, ...DARK_ONLY]],
   ['Gold', gold, GOLD_ONLY],
 ]) {

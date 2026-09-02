@@ -3,190 +3,134 @@
 Live reference: `pages/about.html` (published as an Artifact).
 Replaces: `/about-avocadots-design-studio`.
 
-Built entirely on the design system — every colour is a semantic token, the type
-is the system's fluid scale, spacing is the 8pt rhythm, and the section rhythm
-alternates white → tint → forest as `foundations/layout.md` prescribes.
+Built on the studio's preferred draft — its section architecture is kept almost
+entirely — rebuilt on the design system.
 
 ---
 
-## The idea
+## Why this draft was the right base
 
-Their mission line is **"To engineer growth that feels human."** That sentence is
-the page. So the composition alternates:
+Its content architecture is stronger than the earlier version in three ways:
 
-- **Engineered** — a credential bar, a dated origin arc, a systems diagram, a
-  platform matrix.
-- **Human** — nine people identified by their quirks rather than their titles.
+- **The "how this studio actually works" trio** — the founder takes the first call,
+  design and build sit in the same room, the same names stay on the thread after
+  launch. That is real, checkable differentiation, and the best writing on the page.
+- **Team cards with a role pill, a description and a fun fact** — warmer and more
+  useful than monogram tiles alone.
+- **A complete page**: a named process, a story timeline, values, services and an
+  FAQ, rather than a statement.
 
-The current About page states that mission and then illustrates it with **stock
-abstract photography** — the image credits in the markup name Luca Bravo, Milad
-Fakurian, Christian Lue and Maxim Berg. For a studio selling art direction, stock
-gradients on the About page are the single most expensive detail on the site.
-This page has no stock imagery anywhere, by design.
+## What changed
 
-## Section order
+### Colour — 41 values, none of them the brand's
 
-Revised to follow `/web-design`, the page the studio holds up as the reference.
-The first version of this page ran white → tint → **forest dark, twice**. The
-reference never goes dark — it goes *brighter*: green gradient → light → full
-gold. The dark rhythm made the About page read as a different site.
+The draft contained 41 distinct hex values and **not one came from the brand
+palette**. The near-misses were the real problem: `#15342b` where forest is
+`#1c3830`, `#f0c31a` where gold is `#eac435`, a lime `#c8e45e` where the brand
+green is `#86bd42`. Close enough to look right alone, wrong beside the live site.
 
-| # | Section | Canvas | Job |
-| --: | --- | --- | --- |
-| 1 | Hero + credential chips | **Green gradient + grid** | Mission line, then proof in the first screenful |
-| 2 | Origin + dated arc | Light grey | Where this came from, in their own words |
-| 3 | **The engine** | **Full gold** | Draw the one idea they repeat everywhere |
-| 4 | Values | White | Five real values, one claim each |
-| 5 | The nine | Light grey | The human half of the mission |
-| 6 | Platforms | White | Certifications as capability, not badges |
-| 7 | Close + contact | **Green gradient** | Named-human CTA, then the details |
+Every value is now a token. The page contains **zero raw hex outside `:root`**.
 
-## Matching the reference
+### The category palette (new to the design system)
 
-| Reference device | How it is built here |
-| --- | --- |
-| Green→white gradient hero | `linear-gradient` through four stops, all verified against forest ink |
-| Graph-paper grid | Two `linear-gradient`s at 96px, masked so it fades out — no image asset |
-| Floating frosted pill nav | `border-radius: var(--radius-pill)` + `backdrop-filter: blur(14px)` |
-| Gold primary CTA | `--cta` / `--on-cta`, forest label |
-| White proof chips on colour | `.chip` — white fill, hairline border, ✓ glyph |
-| Full gold section | `.on-gold` context class |
-| Radial line pattern | `repeating-conic-gradient` |
-| Yellow highlighter | `.mark`, using `--highlight` / `--on-highlight` |
+Avatars, service dots and role pills carried roughly fifteen ad-hoc hues — purple,
+red, blue, lime, grey. Rather than flatten that (the multi-colour idea gives each
+person identity) it was rebuilt as a disciplined family of eight tones at
+consistent chroma, **two of which are the brand's own** — forest and moss — so the
+set is anchored rather than bolted on. See `design-system/foundations/color.md`.
 
-## What gold forced
+Every deep tone carries a white label (5.93–12.67:1); every tint carries forest
+(9.72–11.43:1). Rule: **identity, never state.** A berry avatar says *which
+person*, never *something is wrong*.
 
-Gold is far more restrictive than it looks, and this was verified rather than
-assumed. On `#eac435`, forest is 7.51:1 and `green-800` is 5.68:1 — but
-`--ink-muted` is **3.31:1**, `--brand-text` is **4.04:1**, `green-400` is
-**1.33:1**, and white is **1.69:1**. All fail.
+### Accessibility — five measured failures, all fixed
 
-So the engine diagram **could not simply be inverted** off the forest canvas: its
-bright `green-400` strokes were unreadable on gold. Every stroke and label is now
-forest or `green-800`, which turns the diagram into something closer to a
-blueprint — and suits the gold band better than the original did.
+| | Was | Now |
+| --- | --: | --: |
+| Client logo marquee | **1.84:1** | 5.59 |
+| Muted text on cream (13–14px) | 4.47:1 | 5.33 |
+| Avatar: white on lime | **2.26:1** | 6.81 |
+| Avatar: white on lime | **2.30:1** | 6.90 |
 
-The same constraint applies to the closing gradient: the contact labels were
-drafted in `green-800` and measured **4.28:1** against the deep green end, so they
-are full forest, with hierarchy from size and letter-spacing instead of a lighter
-ink. An `opacity` softening was tried and made it worse (3.35:1) — on saturated
-grounds, opacity is not a substitute for a verified colour.
+The marquee was the worst of these — the client logos, the page's social proof,
+were effectively invisible.
 
-## The engine diagram
+Also added, all absent from the draft: `prefers-reduced-motion` handling for the
+four infinite animations, `:focus-visible` rings (the draft had none, while
+stripping link underlines globally), a real FAQ disclosure chevron (the draft
+removed the marker without replacing it), a `<main>` landmark, and real `href`s on
+every nav and service link.
 
-The centrepiece, and the one genuinely new thing on the page.
+### Code
 
-They say *"Not services. Not silos. One engine"* and *"one unified growth engine"*
-across the homepage, the mission page and the services page — and have never drawn
-it. The diagram takes three labelled inputs (Branding, Web design, Digital
-marketing), converges them through a single node, and outputs the three words
-their own mission uses: **clarity, conversion, momentum**.
+- **13 dead CSS classes removed** — `compare`, `chart`, `frag`, `join`, `hl` and
+  others: roughly 60 lines styling sections that did not exist in the markup.
+- **The scroll-reveal did nothing.** It animated on load while the observer only
+  ever set `animationPlayState = "running"`, so everything below the fold had
+  finished before it was scrolled to. Replaced with a resting-visible animation.
+- **The counter rendered a literal `0`** as its no-JS state. It now renders `150+`
+  in the markup and counts up only as an enhancement.
+- Fixed-px tracking on fluid type (`-3.2px` on a `clamp(40px…)` h1 is −8% at
+  mobile) is now em-based. `font-weight:650` removed.
 
-It is inline SVG with a `viewBox`, so it scales cleanly and the labels stay real
-text — searchable, translatable, and readable by a screen reader through the
-`aria-label` on the `<svg>`.
+### Layout
 
-**In Wix:** add it as an SVG (Add → Vector Art → Upload SVG). Do not export it as a
-PNG — the labels have to stay text. It scrolls horizontally inside its container
-below ~620px rather than shrinking to illegibility.
+The draft ran **two full gold bands**. Gold is now spent once — on the positioning
+statement, mirroring where `/web-design` puts its yellow — and the engine diagram
+moved to the green tint. Its SVG takes `var(--ink)` / `var(--ink-muted)`, so it
+inherits whichever surface it sits on rather than being drawn for one canvas.
 
-## The team cards — inverted hierarchy
+## Content
 
-The deliberate move: **name large, quirk as the body, role demoted to a small
-label at the bottom.**
+**Katerina was missing.** The live About page profiles nine people; the draft had
+eight. She is restored, and the fun facts now come from the team's real profiles
+rather than rewrites.
 
-Job titles are interchangeable across every agency in Cyprus. "Brings her dog
-Zizel" is not. Every quirk on the page is drawn from the team's existing profiles —
-nothing invented:
+**Three claims are flagged, not silently kept.** They carry `class="todo"` with a
+dotted underline and a tooltip:
 
-| Person | Role | Line |
-| --- | --- | --- |
-| Andreas Hadjigeorgiou | Founder & CEO | AI, data science, growth analytics. Reads at lightning speed. |
-| Paris | COO | A sharp design eye, and the in-house joker. |
-| Maxim | Web Designer | Obsessed with motion and the psychology behind a layout. |
-| Anna | Web Designer | Focused, steady, reliable. |
-| Olga | Project Manager | The calm in the storm. An interior designer, too. |
-| Charis | Branding Designer | Sees every brand as a living story. |
-| Christina | Digital Marketing Executive | Creativity with structure — and her dog, Zizel. |
-| Andreas | Technical Specialist | Solves the technical problems, efficiently. |
-| Katerina | Multimedia Designer | An architect by training. Makes the video and graphics. |
+1. The **"Then"** timeline entry — the Wix/Shopify milestone. No basis on the live
+   site; confirm the year and the wording.
+2. The **"Since"** timeline entry — the team expansion. Same.
+3. The **founder quote** — presented as a direct attribution to a named person.
+   Confirm the wording with Andreas, or replace it.
 
-**Portraits.** The monogram tiles are placeholders, tinted across
-`green-200/300/400` and `gold-300/500` so the grid reads as a graded set in both
-brand colours. Every tint carries a forest letter and clears AA (5.65 to 9.28). They exist so the page is
-complete without faking photography. Replace them with **real portraits, shot
-consistently** — same lens, same light, same background, same crop. Nine portraits
-shot the same way is itself a design statement; nine shot differently is a
-liability. The current page runs both colour *and* greyscale versions of each
-person, which is two treatments where there should be one.
+**Remove the `.todo` class before launch.** It exists to stop unverified copy
+shipping by accident.
 
-## Copy that needs a decision
+## Open — needs Avocadots to settle
 
-Three things I could not resolve from public information — flagged rather than
-guessed:
+**The 100+ vs 150+ contradiction is on the live site, not from any draft.** The
+homepage says "100+ websites" and "150+ companies"; `/web-design` says "150+
+Websites Delivered". The page uses the defensible reading — **150+ companies
+helped** — but the two pages should be reconciled.
 
-1. **Two people named Andreas.** The CEO and the Technical Specialist. The page
-   currently gives the founder his surname and the other Andreas none, which reads
-   as an oversight. Give both a surname, or give the second a distinguishing role
-   line.
-2. **"Five years"** — the current page says five years of operation from a 2020
-   founding, which is now six. This page says *"Founded 2020"* and *"Five years
-   later…"* in the narrative. Update both to whatever is true at publication, and
-   prefer the founding year over a duration so it never goes stale again.
-3. **Team size.** Nine people are profiled. If the real number is higher, the
-   credential bar and the "The nine" heading both need changing — they are written
-   to be checkable.
+Also still open: the **two people named Andreas** need disambiguating (the founder
+has a surname, the technical specialist does not), and **"five years"** from a 2020
+founding is now six.
 
-## Defects in the current page this fixes
+## Portraits
 
-| Current | This page |
-| --- | --- |
-| Stock abstract photography (four credited photographers) | No stock imagery |
-| No statistics, though the homepage has four | Credential bar in the first screenful |
-| Katerina's profile duplicated | Nine unique entries |
-| Typo: *"cares about your business grow"* | Rewritten |
-| Says "four core principles", lists five | Five, stated as five |
-| Full services list duplicated from `/services` | One line, then a link — About is not a services page |
-| "Start Now" ×6 on service tiles | One primary CTA, naming a person |
-| Reviews mentioned but not shown | Left out rather than promised — see below |
-
-## What would make it stronger
-
-**Testimonials are the missing section.** The current page says *"explore our real
-client reviews and testimonials"* and links away. A named quote from a client, on
-this page, would do more than any of the copy — About pages are read by people
-deciding whether to trust you. Two or three quotes belong between Values and the
-team, using the testimonial component in `components/data-display.md`. I left the
-slot out rather than build a section around content that doesn't exist yet.
-
-**An office photograph.** One real, wide, un-styled shot of the studio in Nicosia,
-full-bleed between the arc and the engine. Not a stock desk.
+Monogram tiles are placeholders on the category tones. Replace with **nine
+portraits shot the same way** — same lens, light, background, crop. Nine shot
+consistently is a design statement; nine shot differently is a liability. The live
+page currently runs both colour and greyscale versions of each person, which is two
+treatments where there should be one.
 
 ## Building it in Wix Studio
 
-1. Apply the Site Colours and Text Themes first (`design-system/wix-mapping.md`) —
-   this page assumes them.
-2. Paste `design-system/tokens/wix-studio.css` into the CSS Editor if not already
-   done. This page uses `on-dark`, `eyebrow`, `btn`, `btn-primary`,
-   `btn-secondary` and `card` from that block.
-3. Build sections top-down. Each is a standard Wix section; the forest ones carry
-   the `on-dark` class and need no other colour settings.
-4. Set section padding with `section-md`, and `section-lg` on the hero and close.
-5. The credential bar, arc, values and team are all CSS Grid — in Wix these are
-   repeaters or grid layouts. Team grid: `repeat(auto-fill, minmax(250px, 1fr))`.
+1. Apply Site Colours and Text Themes first (`design-system/wix-mapping.md`).
+2. Paste `design-system/tokens/wix-studio.css` into the CSS Editor — it now carries
+   the category palette.
+3. Sections map to standard Wix sections; the gold band takes the `on-gold` class.
+4. Team and service grids are CSS Grid with `auto-fit` / `minmax`, which Wix
+   repeaters reproduce directly.
 
-## Accessibility
+## Accessibility checklist
 
-Verified against `design-system/accessibility.md`:
-
-- **One `<h1>`.** The mission line. (The current `/web-design` page has 18 — do not
-  copy that pattern here.)
-- Every colour pair passes AA, across three canvases now — light, forest and gold
-  (51 pairs in `verify-contrast.mjs`). Two rounds of real failures were caught by
-  the script rather than by eye: four pieces of small text set in `--ink-subtle`
-  (team card roles at **2.96:1**), and the closing contact labels at **4.28:1** on
-  the green gradient.
-- The monogram tiles are `aria-hidden` — the name follows in real text.
-- The SVG carries an `aria-label` describing what it shows.
-- Contact details are a `<dl>`, with real `tel:` and `mailto:` links.
-- Reduced motion is honoured; nothing on the page depends on animation to be read.
+- One `<h1>`, a `<main>` landmark, headings descending without skips.
+- 67 contrast pairs verified by script across light, forest and gold contexts.
+- Reduced motion honoured; the page is complete with all motion removed.
+- The stat reads `150+` with JavaScript disabled.
+- The marquee list exists once in the DOM; the visual duplicate is added by script
+  so assistive tech does not read the client list twice.
