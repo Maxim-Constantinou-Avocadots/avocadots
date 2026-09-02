@@ -26,6 +26,42 @@ Its content architecture is stronger than the earlier version in three ways:
 - **A complete page**: a named process, a story timeline, values, services and an
   FAQ, rather than a statement.
 
+## Structure — company and people first
+
+An earlier pass drifted into a services pitch: a growth-asset hero, a full
+portfolio chapter, the engine diagram, and a five-door services grid, with the
+team at position seven and the story at eight. Rebalanced:
+
+| # | Section | About |
+| --: | --- | --- |
+| 1 | **Hero** | "Fresh ideas. Unified growth. Real results." — the studio's own tagline, set as a three-beat typographic statement |
+| 2 | **Who we are** | The founder paragraph, the studio's character, the offices line, and the four figures |
+| 3 | **Our story** | 2020, three people, one small office — given a full forest chapter, not a strip |
+| 4 | **Meet the team** | The centrepiece. Nine people, full bios |
+| 5 | **Why we're different** | One-size-fits-all, and what follows from refusing it |
+| 6 | **How we're built** | The engine diagram — studio structure, so it belongs here |
+| 7 | **The work** | Demoted to six thumbnails and a link to `/projects`, plus the reviews band |
+| 8 | **What we do** | Five compact tiles linking out, with mission / why-choose-us / process |
+| 9 | **Close + footer** | Full footer with six socials, address and legal — previously absent entirely |
+
+Work and services are now *evidence*, not the subject.
+
+## Copy — verbatim from the studio
+
+All body copy is the studio's own, lightly edited for consistency. Restored from
+the live page and previously unused: the tagline, the founder paragraph, the
+"open, vibrant, and always buzzing with ideas" line, "Why we're different", and
+the link to `/reviews` — which answers the missing-testimonials gap flagged
+earlier. It is a real page; the About page now points at it.
+
+### Fun facts: five of nine, not nine of nine
+
+The live profiles give a fun fact to **Andreas (CEO), Paris, Maxim, Olga and
+Christina only**. An earlier draft invented one each for **Anna, Charis,
+technical Andreas and Katerina**. Those are removed — the card simply omits the
+line when there isn't one. Their full bios, which are longer than the versions
+used before, are now used in full.
+
 ## The art direction
 
 The earlier version read as a wireframe, and the reason was structural: nearly
